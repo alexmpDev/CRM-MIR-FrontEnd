@@ -8,6 +8,7 @@ import {
     Chip,
     Tooltip,
     Progress,
+    Button
 } from "@material-tailwind/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { authorsTableData, projectsTableData } from "@/data";
@@ -32,14 +33,16 @@ export function Students() {
     }
 
     const { students } = useSelector(state => state.students)
+    console.log(students)
     const currentDate = new Date();
     return (
         <div className="mt-12 mb-8 flex flex-col gap-12">
             <Card>
-                <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
+                <CardHeader variant="gradient" color="gray" className="mb-8 p-6 flex justify-between items-center">
                     <Typography variant="h6" color="white">
                         Students Table
                     </Typography>
+                    <Link to="/students"><Button>+</Button></Link>
                 </CardHeader>
                 <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
                     <table className="w-full min-w-[640px] table-auto">
@@ -111,7 +114,7 @@ export function Students() {
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {((currentDate.getFullYear() - new Date(birthDate).getFullYear()) >= 18 || leave) ? (
+                                                    {((currentDate.getFullYear() - new Date(birthDate).getFullYear()) >= 18 || leave == 'true') ? (
                                                         <span role="img" aria-label="Tick">✔️</span>
                                                     ) : (
                                                         <span role="img" aria-label="Cross">❌</span>

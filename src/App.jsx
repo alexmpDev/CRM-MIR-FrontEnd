@@ -1,10 +1,12 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Dashboard, Auth } from "@/layouts";
 import { StudentsEdit } from "./pages/dashboard/students/studentsEdit";
+import StudentsCreate from "./pages/dashboard/students/studentsCreate";
 
 function App() {
   return (
     <Routes>
+      <Route path="/students" element={<StudentsCreate />} />
       <Route path="/students/:id" element={<StudentsEdit />} />
       <Route path="/dashboard/*" element={<Dashboard />} />
       <Route path="/auth/*" element={<Auth />} />

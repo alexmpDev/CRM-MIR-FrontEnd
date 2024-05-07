@@ -3,35 +3,22 @@ import {
     Input,
     Button,
     Typography,
-    select,
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from 'react-redux';
-import { edit, listAll, listOne } from "@/slices/students/thunks";
+import { create } from "@/slices/students/thunks"; // Assuming you have a create thunk
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useForm } from 'react-hook-form';
-import { useState } from "react";
-export function StudentsEdit() {
 
-    const { student } = useSelector(state => state.students)
+export function StudentsCreate() {
+    const { student } = useSelector(state => state.students);
     const navigate = useNavigate();
     const { id } = useParams();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(listOne(id));
-    }, []);
 
-    console.log(student)
+
     const onSubmit = async (data) => {
-        console.log(data.leave);
-        data.name ? "" : data.name = student.name
-        data.surname1 ? "" : data.surname1 = student.surname1
-        data.surname2 ? "" : data.surname2 = student.surname2
-        data.curs ? "" : data.curs = student.curs
-        data.dni ? "" : data.dni = student.dni
-        data.birthDate ? "" : data.birthDate = student.birthDate
-        console.log(id)
-        await dispatch(edit(data, id));
+        await dispatch(create(data));
         navigate("/dashboard/students");
     };
 
@@ -39,70 +26,70 @@ export function StudentsEdit() {
         <div className="mt-12 mb-8 flex justify-center">
             <div className="w-full lg:w-3/5">
                 <div className="text-center">
-                    <Typography variant="h2" className="font-bold mb-4">Edit {student.name}, id: {id}</Typography>
-                    <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Just change the fields you want to Update</Typography>
+                    <Typography variant="h2" className="font-bold mb-4">Create Student</Typography>
+                    <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Fill the fields to create a new student</Typography>
                 </div>
                 <form className="mt-8 mx-auto w-80 max-w-screen-lg lg:w-1/2" onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">Name</Typography>
                         <Input
-                            {...register('name')}
-                            defaultValue={student.name}
+                            {...register('name', { required: true })}
                             name="name"
                             type="text"
                             size="lg"
                             className="border-t-blue-gray-200 focus:border-t-gray-900"
                         />
+                        {errors.name && <span className="text-red-500">Name is required</span>}
                     </div>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">Surname1</Typography>
                         <Input
-                            {...register('surname1')}
+                            {...register('surname1', { required: true })}
                             type="text"
-                            defaultValue={student.surname1}
                             size="lg"
                             className="border-t-blue-gray-200 focus:border-t-gray-900"
                         />
+                        {errors.surname1 && <span className="text-red-500">Surname1 is required</span>}
                     </div>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">Surname2</Typography>
                         <Input
-                            {...register('surname2')}
+                            {...register('surname2', { required: true })}
                             type="text"
-                            defaultValue={student.surname2}
                             size="lg"
                             className="border-t-blue-gray-200 focus:border-t-gray-900"
                         />
+                        {errors.surname2 && <span className="text-red-500">Surname2 is required</span>}
                     </div>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">Curs</Typography>
                         <Input
-                            {...register('curs')}
+                            {...register('curs', { required: true })}
                             type="text"
-                            defaultValue={student.curs}
                             size="lg"
                             className="border-t-blue-gray-200 focus:border-t-gray-900"
                         />
+                        {errors.curs && <span className="text-red-500">Curs is required</span>}
                     </div>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">DNI</Typography>
                         <Input
-                            {...register('dni')}
+                            {...register('dni', { required: true })}
                             type="text"
-                            defaultValue={student.dni}
                             size="lg"
                             className="border-t-blue-gray-200 focus:border-t-gray-900"
                         />
+                        {errors.dni && <span className="text-red-500">DNI is required</span>}
                     </div>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">BirthDate</Typography>
                         <Input
-                            {...register('birthDate')}
+                            {...register('birthDate', { required: true })}
                             type="date"
-                            defaultValue={student.birthDate}
                             size="lg"
                             className="border-t-blue-gray-200 focus:border-t-gray-900"
                         />
+                        {errors.birthDate && <span className="text-red-500">BirthDate is required</span>}
                     </div>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">Photo</Typography>
@@ -114,18 +101,16 @@ export function StudentsEdit() {
                         />
                     </div>
                     <div className="mb-6 flex items-center">
-                        <select
+                        <input
                             {...register('leave')}
+                            type="checkbox"
                             id="leave"
-                            defaultValue={student.leave}
                             className="rounded border-gray-300 text-blue-500 focus:border-t-gray-900 focus:ring-t-gray-900"
-                        >
-                            <option value="true" selected={student.leave === "true"}>Yes</option>
-                            <option value="false" selected={student.leave === "false"}>No</option>
-                        </select>
+                        />
                         <label htmlFor="leave" className="ml-2 text-sm text-blue-gray-700">Can leave in yard</label>
                     </div>
-                    <Button type="submit" className="mt-6" fullWidth>Edit</Button>
+
+                    <Button type="submit" className="mt-6" fullWidth>Create</Button>
                 </form>
                 <div className="mt-6 flex justify-center w-full">
                     <Link to="/dashboard/students"><Button>Return</Button></Link>
@@ -135,4 +120,4 @@ export function StudentsEdit() {
     );
 }
 
-export default StudentsEdit;
+export default StudentsCreate;
