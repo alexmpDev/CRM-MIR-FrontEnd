@@ -83,3 +83,21 @@ export const edit = (payload, id) => {
     }
 }
 
+export const del = (id) => {
+    return async (dispatch, getState) => {
+
+        try {
+            await fetch("http://127.0.0.1:8000/api/students/" + id , {
+                headers: {
+                    Accept: "application/json",
+                },
+                method: "DELETE",
+            })
+
+        } catch (error) {
+            console.log(error);
+            alert("Catchch");
+        }
+    }
+}
+

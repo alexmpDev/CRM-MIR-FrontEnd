@@ -12,15 +12,24 @@ import {
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { authorsTableData, projectsTableData } from "@/data";
 import { useSelector, useDispatch } from 'react-redux';
-import { listAll } from "@/slices/students/thunks";
-import { Link } from "react-router-dom";
+import { del, listAll } from "@/slices/students/thunks";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Students() {
     const dispatch = useDispatch()
-
+    const navigate = useNavigate();
     useEffect(() => {
         dispatch(listAll());
     }, [])
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const id = formData.get('id');
+        const ok = confirm("Want to delete this student")
+        ok ? await dispatch(del(id)) : ""
+        dispatch(listAll());
+    }
 
     const { students } = useSelector(state => state.students)
     const currentDate = new Date();
@@ -63,7 +72,7 @@ export function Students() {
                                         <tr key={name}>
                                             <td className={className}>
                                                 <div className="flex items-center gap-4">
-                                                    <Avatar src={"http://localhost:8000/storage/"+ photo} alt={name} size="sm" variant="rounded" />
+                                                    <Avatar src={"http://localhost:8000/storage/" + photo} alt={name} size="sm" variant="rounded" />
                                                     <div>
                                                         <Typography
                                                             variant="small"
@@ -110,13 +119,28 @@ export function Students() {
                                                 </Typography>
                                             </td>
                                             <td className={className}>
-                                                    <Typography
-                                                        as="a"
-                                                        href={"/students/" + id}
-                                                        className="text-xs font-semibold text-blue-gray-600"
-                                                    >
-                                                        Edit
-                                                    </Typography>
+                                                <Typography
+                                                    as="a"
+                                                    href={"/students/" + id}
+                                                    className="text-xs font-semibold text-blue-gray-600"
+                                                >
+                                                    Edit
+                                                </Typography>
+
+                                            </td>
+                                            <td className={className}>
+
+                                                <Typography
+                                                    as="a"
+                                                    className="text-xs font-semibold text-blue-gray-600"
+                                                >
+                                                    <form onSubmit={handleSubmit}>
+                                                        <button type="submit">
+                                                            <input type="hidden" name="id" value={id} />
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </Typography>
 
                                             </td>
                                         </tr>
@@ -127,7 +151,7 @@ export function Students() {
                     </table>
                 </CardBody>
             </Card>
-        </div>
+        </div >
     );
 }
 
