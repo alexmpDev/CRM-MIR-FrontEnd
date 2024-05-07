@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Home, Tables } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
+import Students from "./pages/dashboard/students/students";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -23,12 +24,12 @@ export const routes = [
         path: "/home",
         element: <Home />,
       },
-      // {
-      //   icon: <UserCircleIcon {...icon} />,
-      //   name: "profile",
-      //   path: "/profile",
-      //   element: <Profile />,
-      // },
+      {
+        icon: <UserCircleIcon {...icon} />,
+        name: "students",
+        path: "/students",
+        element: <Students />,
+      },
       {
         icon: <TableCellsIcon {...icon} />,
         name: "tables",
