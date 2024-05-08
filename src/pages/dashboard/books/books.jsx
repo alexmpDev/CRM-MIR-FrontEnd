@@ -13,7 +13,7 @@ import {
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { authorsTableData, projectsTableData } from "@/data";
 import { useSelector, useDispatch } from 'react-redux';
-import { listAll } from "@/slices/books/thunks";
+import { listAll, del } from "@/slices/books/thunks";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -28,14 +28,14 @@ export function Books() {
         await dispatch(listAll(data.title, data.author, data.gender));
     };
 
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
-    //     const formData = new FormData(event.target);
-    //     const id = formData.get('id');
-    //     const ok = confirm("Want to delete this student")
-    //     ok ? await dispatch(del(id)) : ""
-    //     dispatch(listAll());
-    // }
+    const handleDelete = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const id = formData.get('id');
+        const ok = confirm("Want to delete this student")
+        ok ? await dispatch(del(id)) : ""
+        dispatch(listAll());
+    }
 
     const { books } = useSelector(state => state.books)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -115,7 +115,7 @@ export function Books() {
                                             <td className={className}>
                                                 <Typography
                                                     as="a"
-                                                    href={"/students/" + id}
+                                                    href={"/books/" + id}
                                                     className="text-xs font-semibold text-blue-gray-600"
                                                 >
                                                     Edit
@@ -127,12 +127,12 @@ export function Books() {
                                                     as="a"
                                                     className="text-xs font-semibold text-blue-gray-600"
                                                 >
-                                                    {/* <form onSubmit={handleSubmit}>
+                                                    <form onSubmit={handleDelete}>
                                                         <button type="submit">
                                                             <input type="hidden" name="id" value={id} />
                                                             Delete
                                                         </button>
-                                                    </form> */}
+                                                    </form>
                                                 </Typography>
                                             </td>
                                         </tr>
