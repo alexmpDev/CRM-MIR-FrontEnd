@@ -49,13 +49,13 @@ export function Books() {
                     </Typography>
                     <div >
                         <form onSubmit={handleSubmit(handleFilter)} class="flex gap-4">
-                            <input type="text" placeholder="title" class="border border-black p-2 flex-1 text-black" {...register("title", { required: false })} />
-                            <input type="text" placeholder="author" class="border border-black p-2 flex-1 text-black" {...register("author", { required: false })} />
-                            <input type="text" placeholder="gender" class="border border-black p-2 flex-1 text-black" {...register("gender", { required: false })} />
-                            <button type="submit" class=" p-2 bg-gray-900 hover:bg-gray-800">FILTER</button>
+                            <input type="text" placeholder="title" class="border border-black p-1 flex-1 text-black" {...register("title", { required: false })} />
+                            <input type="text" placeholder="author" class="border border-black p-1 flex-1 text-black" {...register("author", { required: false })} />
+                            <input type="text" placeholder="gender" class="border border-black p-1 flex-1 text-black" {...register("gender", { required: false })} />
+                            <button type="submit" class=" p-1 bg-gray-900 hover:bg-gray-800">FILTER</button>
                         </form>
                     </div>
-                    <Link to="/students">
+                    <Link to="/books">
                         <Button>+</Button>
                     </Link>
                 </CardHeader>
