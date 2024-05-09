@@ -90,7 +90,7 @@ export function Observations() {
                                             <td className={className}>
                                                 <Typography
                                                     as="a"
-                                                    href={"/students/phone/edit/" + id}
+                                                    href={"/students/observations/edit/" + id}
                                                     className="text-xs font-semibold text-blue-gray-600"
                                                 >
                                                     Edit

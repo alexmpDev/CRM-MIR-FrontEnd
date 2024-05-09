@@ -9,6 +9,7 @@ import Phones from "./pages/dashboard/contactPhone/phoneList";
 import PhoneCreate from "./pages/dashboard/contactPhone/phoneCreate";
 import PhoneEdit from "./pages/dashboard/contactPhone/phoneEdit";
 import Observations from "./pages/dashboard/observationStudents/observations";
+import ObservationEdit from "./pages/dashboard/observationStudents/observationsEdit";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/books/:id" element={<BooksEdit />} />
       <Route path="/students" element={<StudentsCreate />} />
       <Route path="/students/phone/edit/:id" element={<PhoneEdit />} />
+      <Route path="/students/observations/edit/:id" element={<ObservationEdit />} />
       <Route path="/students/phone/create/:id" element={<PhoneCreate />} />
       <Route path="/students/phone/:id" element={<Phones />} />
       <Route path="/students/observations/:id" element={<Observations />} />
