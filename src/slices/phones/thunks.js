@@ -1,4 +1,4 @@
-import { setPhones } from "./phonesSlice"
+import { setPhone, setPhones } from "./phonesSlice"
 
 
 export const listAll = (studentId ) => {
@@ -45,6 +45,57 @@ export const create = (payload, studentId ) => {
 
             }
             crea()
+        } catch (error) {
+            console.log(error);
+            alert("Catchch");
+        }
+    }
+}
+
+export const listOne = (id) => {
+    return async (dispatch, getState) => {
+        try {
+            const lis = async () => {
+                const data = await fetch("http://localhost:8000/api/students/phones/" + id, {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    method: "GET",
+                })
+
+                const response = await data.json()
+
+                if (response) {
+                    dispatch(setPhone(response[0]))
+
+                }
+
+            }
+            lis()
+        } catch (error) {
+            console.log(error);
+            alert("Catchch");
+        }
+    }
+}
+
+export const edit = (payload, id) => {
+    return async (dispatch, getState) => {
+        try {
+            const edi = async () => {
+                payload.student_id = id
+                const data = await fetch("http://localhost:8000/api/students/phoneinfo/" + id, {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    method: "POST",
+                    body: JSON.stringify(payload)
+                })
+
+            }
+            edi()
         } catch (error) {
             console.log(error);
             alert("Catchch");

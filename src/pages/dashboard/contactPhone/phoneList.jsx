@@ -53,7 +53,7 @@ export function Phones() {
                     <table className="w-full min-w-[640px] table-auto">
                         <thead>
                             <tr>
-                                {["Name", "Phone", "Student_id"].map((el) => (
+                                {["Name", "Phone"].map((el) => (
                                     <th
                                         key={el}
                                         className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -93,14 +93,9 @@ export function Phones() {
                                                 </Typography>
                                             </td>
                                             <td className={className}>
-                                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {student_id}
-                                                </Typography>
-                                            </td>
-                                            <td className={className}>
                                                 <Typography
                                                     as="a"
-                                                    href={"/books/" + id}
+                                                    href={"/students/phone/edit/" + id}
                                                     className="text-xs font-semibold text-blue-gray-600"
                                                 >
                                                     Edit
