@@ -6,6 +6,7 @@ import BooksEdit from "./pages/dashboard/books/booksEdit";
 import BooksCreate from "./pages/dashboard/books/booksCreate";
 import StudentsShow from "./pages/dashboard/students/studentsShow";
 import Phones from "./pages/dashboard/contactPhone/phoneList";
+import PhoneCreate from "./pages/dashboard/contactPhone/phoneCreate";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/books" element={<BooksCreate />} />
       <Route path="/books/:id" element={<BooksEdit />} />
       <Route path="/students" element={<StudentsCreate />} />
+      <Route path="/students/phone/create/:id" element={<PhoneCreate />} />
       <Route path="/students/phone/:id" element={<Phones />} />
       <Route path="/students/show/:id" element={<StudentsShow />} />
       <Route path="/students/:id" element={<StudentsEdit />} />

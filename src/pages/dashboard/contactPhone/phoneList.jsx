@@ -45,7 +45,7 @@ export function Phones() {
                     <Typography variant="h6" color="white">
                         Phones Table
                     </Typography>
-                    <Link to="/books">
+                    <Link to={"/students/phone/create/" + id}>
                         <Button>+</Button>
                     </Link>
                 </CardHeader>

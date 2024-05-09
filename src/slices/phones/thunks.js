@@ -28,5 +28,29 @@ export const listAll = (studentId ) => {
     }
 }
 
+export const create = (payload, studentId ) => {
+    return async (dispatch, getState) => {
+        try {
+
+            payload.student_id = studentId;
+            const crea = async () => {
+                const data = await fetch("http://localhost:8000/api/students/phoneinfo", {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    method: "POST",
+                    body: JSON.stringify(payload)
+                })
+
+            }
+            crea()
+        } catch (error) {
+            console.log(error);
+            alert("Catchch");
+        }
+    }
+}
+
 
 
