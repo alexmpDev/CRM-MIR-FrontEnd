@@ -60,7 +60,7 @@ export function PhoneEdit() {
                     <Button type="submit" className="mt-6" fullWidth>Edit</Button>
                 </form>
                 <div className="mt-6 flex justify-center w-full">
-                    {/* <Link to={"/students/phone/" + phone.id}><Button>Return</Button></Link> */}
+                    <Link to={"/students/phone/" + selectedPhone.student_id}><Button>Return</Button></Link>
                 </div>
             </div>
         </div>
