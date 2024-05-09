@@ -72,20 +72,23 @@ export function Students() {
                                         }`;
 
                                     return (
+
                                         <tr key={name}>
                                             <td className={className}>
-                                                <div className="flex items-center gap-4">
-                                                    <Avatar src={"http://localhost:8000/storage/" + photo} alt={name} size="sm" variant="rounded" />
-                                                    <div>
-                                                        <Typography
-                                                            variant="small"
-                                                            color="blue-gray"
-                                                            className="font-semibold"
-                                                        >
-                                                            {name}
-                                                        </Typography>
+                                                <Link to={"/students/show/" + id}>
+                                                    <div className="flex items-center gap-4">
+                                                        <Avatar src={"http://localhost:8000/storage/" + photo} alt={name} size="sm" variant="rounded" />
+                                                        <div>
+                                                            <Typography
+                                                                variant="small"
+                                                                color="blue-gray"
+                                                                className="font-semibold"
+                                                            >
+                                                                {name}
+                                                            </Typography>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </Link>
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
@@ -144,7 +147,6 @@ export function Students() {
                                                         </button>
                                                     </form>
                                                 </Typography>
-
                                             </td>
                                         </tr>
                                     );

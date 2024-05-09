@@ -4,6 +4,8 @@ import { StudentsEdit } from "./pages/dashboard/students/studentsEdit";
 import StudentsCreate from "./pages/dashboard/students/studentsCreate";
 import BooksEdit from "./pages/dashboard/books/booksEdit";
 import BooksCreate from "./pages/dashboard/books/booksCreate";
+import StudentsShow from "./pages/dashboard/students/studentsShow";
+import Phones from "./pages/dashboard/contactPhone/phoneList";
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
       <Route path="/books" element={<BooksCreate />} />
       <Route path="/books/:id" element={<BooksEdit />} />
       <Route path="/students" element={<StudentsCreate />} />
+      <Route path="/students/phone/:id" element={<Phones />} />
+      <Route path="/students/show/:id" element={<StudentsShow />} />
       <Route path="/students/:id" element={<StudentsEdit />} />
       <Route path="/dashboard/*" element={<Dashboard />} />
       <Route path="/auth/*" element={<Auth />} />
