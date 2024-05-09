@@ -45,7 +45,7 @@ export function Observations() {
                     <Typography variant="h6" color="white">
                         Observations Table
                     </Typography>
-                    <Link to={"/students/phone/create/" + id}>
+                    <Link to={"/students/observations/create/" + id}>
                         <Button>+</Button>
                     </Link>
                 </CardHeader>
