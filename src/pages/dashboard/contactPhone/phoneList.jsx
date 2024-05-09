@@ -15,7 +15,7 @@ import { authorsTableData, projectsTableData } from "@/data";
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { listAll } from "@/slices/phones/thunks";
+import { del, listAll } from "@/slices/phones/thunks";
 
 export function Phones() {
     const dispatch = useDispatch()
@@ -25,14 +25,14 @@ export function Phones() {
         dispatch(listAll(id));
     }, [])
 
-    // const handleDelete = async (event) => {
-    //     event.preventDefault();
-    //     const formData = new FormData(event.target);
-    //     const id = formData.get('id');
-    //     const ok = confirm("Want to delete this student")
-    //     ok ? await dispatch(del(id)) : ""
-    //     dispatch(listAll());
-    // }
+    const handleDelete = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const deleteId = formData.get('id');
+        const ok = confirm("Want to delete this phonr")
+        ok ? await dispatch(del(deleteId)) : ""
+        dispatch(listAll(id));
+    }
 
     const { phones } = useSelector(state => state.phones)
     console.log(phones)
@@ -103,7 +103,7 @@ export function Phones() {
                                             </td>
                                             <td className={className}>
 
-                                                {/* <Typography
+                                                <Typography
                                                     as="a"
                                                     className="text-xs font-semibold text-blue-gray-600"
                                                 >
@@ -113,7 +113,7 @@ export function Phones() {
                                                             Delete
                                                         </button>
                                                     </form>
-                                                </Typography> */}
+                                                </Typography>
                                             </td>
                                         </tr>
                                     );

@@ -103,5 +103,27 @@ export const edit = (payload, id) => {
     }
 }
 
+export const del = ( id) => {
+    return async (dispatch, getState) => {
+        try {
+            const de = async () => {
+
+                const data = await fetch("http://localhost:8000/api/students/phoneinfo/" + id, {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    method: "DELETE",
+                })
+
+            }
+            de()
+        } catch (error) {
+            console.log(error);
+            alert("Catchch");
+        }
+    }
+}
+
 
 
