@@ -51,6 +51,7 @@ export function StudentsShow() {
                     <div className="mt-6 flex justify-center w-full">
                         <Link to={"/students/phone/" + id}><Button className="mr-2">Contacts</Button></Link>
                         <Link to="/dashboard/students"><Button>Return</Button></Link>
+                        <Link to={"/students/observations/" + id}><Button className="ml-2">Observations</Button></Link>
                     </div>
                 </div>
             </div>
