@@ -1,12 +1,10 @@
 import {
   HomeIcon,
   UserCircleIcon,
-  TableCellsIcon,
-  InformationCircleIcon,
   ServerStackIcon,
   RectangleStackIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Tables } from "@/pages/dashboard";
+import { Home } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import Students from "./pages/dashboard/students/students";
 import Books from "./pages/dashboard/books/books";
@@ -36,11 +34,6 @@ export const routes = [
         name: "Books",
         path: "/books",
         element: <Books />,
-      },
-      {
-        icon: <TableCellsIcon {...icon} />,        name: "tables",
-        path: "/tables",
-        element: <Tables />,
       },
     ],
   },
