@@ -23,11 +23,11 @@ export function ReservationsShow() {
                 <div className="mt-8 mx-auto w-80 max-w-screen-lg lg:w-1/2">
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">Book name:</Typography>
-                        <Typography variant="paragraph">{reservation.book.title}</Typography>
+                        <Typography variant="paragraph">{reservation.book?.title}</Typography>
                     </div>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">Student name:</Typography>
-                        <Typography variant="paragraph">{reservation.student.name}</Typography>
+                        <Typography variant="paragraph">{reservation.student?.name}</Typography>
                     </div>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">Return Date:</Typography>
