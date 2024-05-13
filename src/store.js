@@ -3,6 +3,7 @@ import { studentReducer } from './slices/students/studentsSlice';
 import { bookReducer } from './slices/books/booksSlice';
 import { phoneReducer } from './slices/phones/phonesSlice';
 import { observationReducer } from './slices/observations/observationsSlice';
+import { reservationsReducer } from './slices/reservations/reservationsSlice';
 
 
 const store = configureStore({
@@ -10,7 +11,8 @@ const store = configureStore({
         students: studentReducer,
         books: bookReducer,
         phones: phoneReducer,
-        observations: observationReducer
+        observations: observationReducer,
+        reservations: reservationsReducer,
     },
 }) 
 
