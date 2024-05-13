@@ -11,12 +11,14 @@ import PhoneEdit from "./pages/dashboard/contactPhone/phoneEdit";
 import Observations from "./pages/dashboard/observationStudents/observations";
 import ObservationEdit from "./pages/dashboard/observationStudents/observationsEdit";
 import ObservationCreate from "./pages/dashboard/observationStudents/observationCreate";
+import ReservationsCreate from "./pages/dashboard/reservations/reservationsCreate";
 
 function App() {
   return (
     <Routes>
       <Route path="/books" element={<BooksCreate />} />
       <Route path="/books/:id" element={<BooksEdit />} />
+      <Route path="/reservations" element={<ReservationsCreate />} />
       <Route path="/students" element={<StudentsCreate />} />
       <Route path="/students/phone/edit/:id" element={<PhoneEdit />} />
       <Route path="/students/observations/create/:id" element={<ObservationCreate />} />

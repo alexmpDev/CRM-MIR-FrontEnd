@@ -90,23 +90,23 @@ export const del = (id) => {
     }
 }
 
-// export const create = (payload) => {
-//     return async (dispatch, getState) => {
+export const create = (payload) => {
+    return async (dispatch, getState) => {
 
-//         try {
-//             await fetch("http://127.0.0.1:8000/api/books/" , {
-//                 headers: {
-//                     Accept: "application/json",
-//                     "Content-Type": "application/json"
-//                 },
-//                 method: "POST",
-//                 body: JSON.stringify(payload)
-//             })
+        try {
+            await fetch("http://127.0.0.1:8000/api/reservations" , {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                method: "POST",
+                body: JSON.stringify(payload)
+            })
 
-//         } catch (error) {
-//             console.log(error);
-//             alert("Catchch");
-//         }
-//     }
-// }
+        } catch (error) {
+            console.log(error);
+            alert("Catchch");
+        }
+    }
+}
 

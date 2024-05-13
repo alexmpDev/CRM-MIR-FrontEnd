@@ -40,8 +40,7 @@ export function Reservations() {
     };
 
     const { reservations } = useSelector(state => state.reservations)
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    const currentDate = new Date();
+
     return (
         <div className="mt-12 mb-8 flex flex-col gap-12">
             <Card>
@@ -55,7 +54,7 @@ export function Reservations() {
                             <button type="submit" class=" p-1 bg-gray-900 hover:bg-gray-800">FILTER</button>
                         </form> */}
                     </div>
-                    <Link to="/books">
+                    <Link to="/reservations">
                         <Button>+</Button>
                     </Link>
                 </CardHeader>
