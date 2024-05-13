@@ -9,7 +9,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { listAll, del, edit } from "@/slices/reservations/thunks";
+import { listAll, del, edit, filter } from "@/slices/reservations/thunks";
 
 export function Reservations() {
     const dispatch = useDispatch()
@@ -17,8 +17,10 @@ export function Reservations() {
         dispatch(listAll());
     }, [])
 
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const handleFilter = async (data) => {
-        await dispatch(listAll());
+        console.log(data)
+        await dispatch(filter(data.book_id, data.student_id, ));
     };
 
     const handleDelete = async (event) => {
@@ -49,10 +51,12 @@ export function Reservations() {
                         Reservations Table
                     </Typography>
                     <div >
-                        {/* <form onSubmit={handleSubmit(handleFilter)} class="flex gap-4">
-                            <input type="text" placeholder="title" class="border border-black p-1 flex-1 text-black" {...register("title", { required: false })} />
+                        <form onSubmit={handleSubmit(handleFilter)} class="flex gap-4">
+                            <input type="text" placeholder="book_id" class="border border-black p-1 flex-1 text-black" {...register("book_id", { required: false })} />
+                            <input type="text" placeholder="student_id" class="border border-black p-1 flex-1 text-black" {...register("student_id", { required: false })} />
+
                             <button type="submit" class=" p-1 bg-gray-900 hover:bg-gray-800">FILTER</button>
-                        </form> */}
+                        </form> 
                     </div>
                     <Link to="/reservations">
                         <Button>+</Button>
@@ -87,11 +91,13 @@ export function Reservations() {
 
                                     return (
                                         <tr key={book_id}>
-                                            <td className={className}>
-                                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {book_id}
-                                                </Typography>
-                                            </td>
+                                            <Link to={"/reservations/show/" + id}>
+                                                <td className={className}>
+                                                    <Typography className="text-xs font-semibold text-blue-gray-600">
+                                                        {book_id}
+                                                    </Typography>
+                                                </td>
+                                            </Link>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
                                                     {student_id}

@@ -4,14 +4,14 @@ const reservationsSlice = createSlice({
     name: 'reservations',
     initialState: {
         reservations: [],
-        reservation: []
+        reservation: {}
     },
     reducers: {
         setReservations: (state, action) => {
             state.reservations = action.payload
         },
-        setReservations: (state, action) => {
-            state.reservations = action.payload
+        setReservation: (state, action) => {
+            state.reservation = action.payload
         },
     },
 })
