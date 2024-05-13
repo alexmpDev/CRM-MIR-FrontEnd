@@ -4,19 +4,12 @@ import {
     CardHeader,
     CardBody,
     Typography,
-    Avatar,
-    Chip,
-    Tooltip,
-    Progress,
     Button
 } from "@material-tailwind/react";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import { authorsTableData, projectsTableData } from "@/data";
 import { useSelector, useDispatch } from 'react-redux';
-import { del } from "@/slices/books/thunks";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { listAll } from "@/slices/reservations/thunks";
+import { listAll, del, edit } from "@/slices/reservations/thunks";
 
 export function Reservations() {
     const dispatch = useDispatch()
@@ -25,18 +18,26 @@ export function Reservations() {
     }, [])
 
     const handleFilter = async (data) => {
-        console.log(data)
         await dispatch(listAll());
     };
 
     const handleDelete = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
         const formData = new FormData(event.target);
-        const id = formData.get('id');
-        const ok = confirm("Want to delete this student")
-        ok ? await dispatch(del(id)) : ""
+        const deleteId = formData.get('id');
+        const ok = confirm("Want to delete this reservation")
+        ok ? await dispatch(del(deleteId)) : ""
         dispatch(listAll());
     }
+
+    const handleReturn = async (event) => {
+        event.preventDefault()
+        const formData = new FormData(event.target);
+        const returnId = formData.get('id');
+        const ok = confirm("This book have been returned?")
+        ok ? await dispatch(edit(returnId)) : ""
+        dispatch(listAll());
+    };
 
     const { reservations } = useSelector(state => state.reservations)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -104,16 +105,20 @@ export function Reservations() {
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                {returned == 'true'? <span role="img" aria-label="Tick">✔️</span> : <span role="img" aria-label="Cross">❌</span>}
+                                                    {returned == 'true' || returned == 1 ? <span role="img" aria-label="Tick">✔️</span> : <span role="img" aria-label="Cross">❌</span>}
                                                 </Typography>
                                             </td>
                                             <td className={className}>
                                                 <Typography
                                                     as="a"
-                                                    href={"/books/" + id}
                                                     className="text-xs font-semibold text-blue-gray-600"
                                                 >
-                                                    Edit
+                                                    <form onSubmit={handleReturn}>
+                                                        <button type="submit">
+                                                            <input type="hidden" name="id" value={id} />
+                                                            Returned
+                                                        </button>
+                                                    </form>
                                                 </Typography>
                                             </td>
                                             <td className={className}>

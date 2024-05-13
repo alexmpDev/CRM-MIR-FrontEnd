@@ -51,44 +51,44 @@ export const listAll = () => {
 //     }
 // }
 
-// export const edit = (payload, id) => {
-//     return async (dispatch, getState) => {
+export const edit = (id) => {
+    return async (dispatch, getState) => {
+        try {
 
-//         try {
+            await fetch("http://127.0.0.1:8000/api/reservations/" + id , {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                method: "POST",
+                body:  JSON.stringify([])
+            })
 
-//             await fetch("http://127.0.0.1:8000/api/books/" + id , {
-//                 headers: {
-//                     Accept: "application/json",
-//                     "Content-Type": "application/json"
-//                 },
-//                 method: "PUT",
-//                 body: JSON.stringify(payload)
-//             })
+        } catch (error) {
+            console.log(error);
+            alert(error);
+        }
+    }
+}
 
-//         } catch (error) {
-//             console.log(error);
-//             alert("Catchch");
-//         }
-//     }
-// }
 
-// export const del = (id) => {
-//     return async (dispatch, getState) => {
+export const del = (id) => {
+    return async (dispatch, getState) => {
 
-//         try {
-//             await fetch("http://127.0.0.1:8000/api/books/" + id , {
-//                 headers: {
-//                     Accept: "application/json",
-//                 },
-//                 method: "DELETE",
-//             })
+        try {
+            await fetch("http://127.0.0.1:8000/api/reservations/" + id , {
+                headers: {
+                    Accept: "application/json",
+                },
+                method: "DELETE",
+            })
 
-//         } catch (error) {
-//             console.log(error);
-//             alert("Catchch");
-//         }
-//     }
-// }
+        } catch (error) {
+            console.log(error);
+            alert("Catchch");
+        }
+    }
+}
 
 // export const create = (payload) => {
 //     return async (dispatch, getState) => {
