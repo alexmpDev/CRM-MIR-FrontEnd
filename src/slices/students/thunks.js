@@ -5,7 +5,7 @@ export const listAll = () => {
         try {
 
             const list = async () => {
-                const data = await fetch("http://127.0.0.1:8000/api/students", {
+                const data = await fetch(process.env.API_URL + "/api/students", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"
@@ -31,7 +31,7 @@ export const listOne = (id) => {
         try {
 
             const list = async () => {
-                const data = await fetch("http://127.0.0.1:8000/api/students/" + id, {
+                const data = await fetch(process.env.API_URL + "/api/students/" + id, {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"
@@ -69,7 +69,7 @@ export const edit = (payload, id) => {
                 formData.append("photo", payload.photo[0]); // Se adjunta el archivo solo si existe
             }
             console.log(formData)
-            await fetch("http://127.0.0.1:8000/api/students/" + id , {
+            await fetch(process.env.API_URL + "/api/students/" + id , {
                 headers: {
                     Accept: "application/json",
                 },
@@ -88,7 +88,7 @@ export const del = (id) => {
     return async (dispatch, getState) => {
 
         try {
-            await fetch("http://127.0.0.1:8000/api/students/" + id , {
+            await fetch(process.env.API_URL + "/api/students/" + id , {
                 headers: {
                     Accept: "application/json",
                 },
@@ -119,7 +119,7 @@ export const create = (payload) => {
                 formData.append("photo", payload.photo[0]); // Se adjunta el archivo solo si existe
             }
             console.log(formData)
-            await fetch("http://127.0.0.1:8000/api/students/" , {
+            await fetch(process.env.API_URL + "/api/students/" , {
                 headers: {
                     Accept: "application/json",
                 },

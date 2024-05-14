@@ -4,7 +4,7 @@ export const listAll = () => {
     return async (dispatch, getState) => {
         try {
             const list = async () => {
-                const data = await fetch("http://localhost:8000/api/reservations", {
+                const data = await fetch(process.env.API_URL + "/api/reservations", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"
@@ -36,7 +36,7 @@ export const filter = (book_id = null, student_id = null,) => {
                 params.set("student_id", student_id)
             }
             const filter = async () => {
-                const data = await fetch("http://localhost:8000/api/reservations/filter?"+ params, {
+                const data = await fetch(process.env.API_URL + "/api/reservations/filter?"+ params, {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"
@@ -62,7 +62,7 @@ export const listOne = (id) => {
         try {
 
             const list = async () => {
-                const data = await fetch("http://127.0.0.1:8000/api/reservations/" + id, {
+                const data = await fetch(process.env.API_URL + "/api/reservations/" + id, {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"
@@ -87,7 +87,7 @@ export const edit = (id) => {
     return async (dispatch, getState) => {
         try {
 
-            await fetch("http://127.0.0.1:8000/api/reservations/" + id , {
+            await fetch(process.env.API_URL + "/api/reservations/" + id , {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json"
@@ -108,7 +108,7 @@ export const del = (id) => {
     return async (dispatch, getState) => {
 
         try {
-            await fetch("http://127.0.0.1:8000/api/reservations/" + id , {
+            await fetch(process.env.API_URL + "/api/reservations/" + id , {
                 headers: {
                     Accept: "application/json",
                 },
@@ -126,7 +126,7 @@ export const create = (payload) => {
     return async (dispatch, getState) => {
 
         try {
-            await fetch("http://127.0.0.1:8000/api/reservations" , {
+            await fetch(process.env.API_URL + "/api/reservations" , {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json"

@@ -7,7 +7,7 @@ export const registerAuth = (payload) => {
         try {
 
             const regist = async () => {
-                const data = await fetch("http://127.0.0.1:8000/api/register", {
+                const data = await fetch(process.env.API_URL + "/api/register", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"
@@ -30,7 +30,7 @@ export const login = (payload) => {
         try {
 
             const log = async () => {
-                const data = await fetch("http://127.0.0.1:8000/api/login", {
+                const data = await fetch(process.env.API_URL + "/api/login", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"

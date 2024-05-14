@@ -7,7 +7,7 @@ export const listAll = (studentId ) => {
 
 
             const list = async () => {
-                const data = await fetch("http://localhost:8000/api/students/" + studentId + "/phones", {
+                const data = await fetch(process.env.API_URL + "/api/students/" + studentId + "/phones", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"
@@ -34,7 +34,7 @@ export const create = (payload, studentId ) => {
 
             payload.student_id = studentId;
             const crea = async () => {
-                const data = await fetch("http://localhost:8000/api/students/phoneinfo", {
+                const data = await fetch(process.env.API_URL + "/api/students/phoneinfo", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"
@@ -56,7 +56,7 @@ export const listOne = (id) => {
     return async (dispatch, getState) => {
         try {
             const lis = async () => {
-                const data = await fetch("http://localhost:8000/api/students/phones/" + id, {
+                const data = await fetch(process.env.API_URL + "/api/students/phones/" + id, {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"
@@ -85,7 +85,7 @@ export const edit = (payload, id) => {
         try {
             const edi = async () => {
                 payload.student_id = id
-                const data = await fetch("http://localhost:8000/api/students/phoneinfo/" + id, {
+                const data = await fetch(process.env.API_URL + "/api/students/phoneinfo/" + id, {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"
@@ -108,7 +108,7 @@ export const del = ( id) => {
         try {
             const de = async () => {
 
-                const data = await fetch("http://localhost:8000/api/students/phoneinfo/" + id, {
+                const data = await fetch(process.env.API_URL + "/api/students/phoneinfo/" + id, {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"

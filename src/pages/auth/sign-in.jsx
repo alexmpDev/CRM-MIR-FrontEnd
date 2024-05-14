@@ -18,7 +18,7 @@ export function SignIn() {
 
   const onSubmit = async (data) => {
     await dispatch(login(data))
-    setTimeout(()=>navigate("/dashboard"), 1000)
+    setTimeout(()=>navigate("/dashboard/home"), 1000)
   };
   return (
     

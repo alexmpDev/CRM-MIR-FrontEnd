@@ -16,7 +16,7 @@ export const listAll = (title = null, author = null, gender = null) => {
             }
 
             const list = async () => {
-                const data = await fetch("http://localhost:8000/api/books/filter?"+ params, {
+                const data = await fetch(process.env.API_URL + "/api/books/filter?"+ params, {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"
@@ -42,7 +42,7 @@ export const listOne = (id) => {
         try {
 
             const list = async () => {
-                const data = await fetch("http://127.0.0.1:8000/api/books/" + id, {
+                const data = await fetch(process.env.API_URL + "/api/books/" + id, {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"
@@ -68,7 +68,7 @@ export const edit = (payload, id) => {
 
         try {
 
-            await fetch("http://127.0.0.1:8000/api/books/" + id , {
+            await fetch(process.env.API_URL + "/api/books/" + id , {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json"
@@ -88,7 +88,7 @@ export const del = (id) => {
     return async (dispatch, getState) => {
 
         try {
-            await fetch("http://127.0.0.1:8000/api/books/" + id , {
+            await fetch(process.env.API_URL + "/api/books/" + id , {
                 headers: {
                     Accept: "application/json",
                 },
@@ -106,7 +106,7 @@ export const create = (payload) => {
     return async (dispatch, getState) => {
 
         try {
-            await fetch("http://127.0.0.1:8000/api/books/" , {
+            await fetch(process.env.API_URL + "/api/books/" , {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json"
