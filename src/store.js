@@ -4,6 +4,7 @@ import { bookReducer } from './slices/books/booksSlice';
 import { phoneReducer } from './slices/phones/phonesSlice';
 import { observationReducer } from './slices/observations/observationsSlice';
 import { reservationsReducer } from './slices/reservations/reservationsSlice';
+import { wcReducer } from './slices/wc/wcSlice';
 
 
 const store = configureStore({
@@ -13,6 +14,7 @@ const store = configureStore({
         phones: phoneReducer,
         observations: observationReducer,
         reservations: reservationsReducer,
+        wc: wcReducer
     },
 }) 
 

@@ -13,10 +13,14 @@ import ObservationEdit from "./pages/dashboard/observationStudents/observationsE
 import ObservationCreate from "./pages/dashboard/observationStudents/observationCreate";
 import ReservationsCreate from "./pages/dashboard/reservations/reservationsCreate";
 import ReservationsShow from "./pages/dashboard/reservations/reservationShow";
+import WcCreate from "./pages/dashboard/wc/wcCreate";
+import WcList from "./pages/dashboard/wc/wcList";
 
 function App() {
   return (
     <Routes>
+      <Route path="/crear-pases-de-bano" element={<WcCreate />} />
+      <Route path="/moderar-pases-de-bano" element={<WcList />} />
       <Route path="/books" element={<BooksCreate />} />
       <Route path="/books/:id" element={<BooksEdit />} />
       <Route path="/reservations" element={<ReservationsCreate />} />
