@@ -1,5 +1,4 @@
-import { useNavigate } from "react-router-dom"
-import { setAuthToken, setName } from "./authSlice"
+import { setAuthToken, setDashboard, setName } from "./authSlice"
 
 
 export const registerAuth = (payload) => {
@@ -28,7 +27,6 @@ export const registerAuth = (payload) => {
 export const login = (payload) => {
     return async (dispatch, getState) => {
         try {
-
             const log = async () => {
                 const data = await fetch(process.env.API_URL + "/api/login", {
                     headers: {
@@ -39,15 +37,47 @@ export const login = (payload) => {
                     body: JSON.stringify(payload)
                 })
                 const response = await data.json()
-
-                if (response) {
+                console.log(response)
+                if (response.success) {
                     await localStorage.setItem("user", payload.email)
+                    await localStorage.setItem("authToken", response.authToken)
                     dispatch(setName(payload.email))
                     dispatch(setAuthToken(response.authToken))
+                    await dispatch(getDashboard())
+                } else {
+                    alert("Wrong credentials")
                 }
 
             }
             log();
+        } catch (error) {
+            console.log(error);
+            alert("Catchch");
+        }
+    }
+}
+
+export const getDashboard = () => {
+    return async (dispatch, getState) => {
+        try {
+            const dash = async () => {
+                const data =  await fetch(process.env.API_URL + "/api/users/dashboard", {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
+                    },
+                    method: "GET"
+                  })
+                const response = await data.json()
+                if (response) {
+                    await localStorage.setItem("menu", JSON.stringify(response))
+                    dispatch(setDashboard(response))
+                    location.href = "/dashboard/home"  
+                } 
+
+            }
+            dash();
         } catch (error) {
             console.log(error);
             alert("Catchch");

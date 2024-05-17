@@ -24,7 +24,6 @@ export function Books() {
     }, [])
 
     const handleFilter = async (data) => {
-        console.log(data)
         await dispatch(listAll(data.title, data.author, data.gender));
     };
 

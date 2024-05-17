@@ -30,10 +30,10 @@ export function DashboardNavbar() {
   const { fixedNavbar, openSidenav } = controller;
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
-  console.log(name)
   const handleSubmit = async () => {
     localStorage.removeItem("user")
-    dispatch2(setAuthToken(""))
+    localStorage.removeItem("menu")
+    localStorage.removeItem("authToken")
   }
   return (
     <Navbar

@@ -15,8 +15,14 @@ import ReservationsCreate from "./pages/dashboard/reservations/reservationsCreat
 import ReservationsShow from "./pages/dashboard/reservations/reservationShow";
 import WcCreate from "./pages/dashboard/wc/wcCreate";
 import WcList from "./pages/dashboard/wc/wcList";
+import { useDispatch } from "react-redux";
+import { setAuthToken, setDashboard, setName } from "./slices/auth/authSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  dispatch(setName(localStorage.getItem('user')))
+  dispatch(setAuthToken(localStorage.getItem('authToken')))
+  dispatch(setDashboard(localStorage.getItem('menu')))
   return (
     <Routes>
       <Route path="/crear-pases-de-bano" element={<WcCreate />} />

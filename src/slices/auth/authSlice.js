@@ -4,7 +4,8 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         name: "",
-        authToken: ""
+        authToken: "",
+        dashboard: []
     },
     reducers: {
         setName: (state, action) => {
@@ -13,10 +14,13 @@ const authSlice = createSlice({
         setAuthToken: (state, action) => {
             state.authToken = action.payload
         },
+        setDashboard: (state, action) => {
+            state.dashboard = action.payload
+        },
     },
 })
 
 
 
-export const { setName, setAuthToken} = authSlice.actions
+export const { setName, setAuthToken, setDashboard} = authSlice.actions
 export const authReducer = authSlice.reducer

@@ -17,7 +17,7 @@ export function SignUp() {
 
   const onSubmit = async (data) => {
     await dispatch(registerAuth(data))
-    navigate("/auth/sing-in");
+    navigate("/auth/sign-in");
 
   };
 

@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/slices/auth/thunks";
 
 export function SignIn() {
@@ -17,8 +17,8 @@ export function SignIn() {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
-    await dispatch(login(data))
-    setTimeout(()=>navigate("/dashboard/home"), 1000)
+    const ok = await dispatch(login(data))
+    // setTimeout(()=>navigate("/dashboard/home"), 1000)
   };
   return (
     
