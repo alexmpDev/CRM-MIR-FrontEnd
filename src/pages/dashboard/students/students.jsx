@@ -77,7 +77,7 @@ export function Students() {
                                             <td className={className}>
                                                 <Link to={"/students/show/" + id}>
                                                     <div className="flex items-center gap-4">
-                                                        <Avatar src={"http://localhost:8000/storage/" + photo} alt={name} size="sm" variant="rounded" />
+                                                        <Avatar src={process.env.API_URL + "/storage/" + photo} alt={name} size="sm" variant="rounded" />
                                                         <div>
                                                             <Typography
                                                                 variant="small"

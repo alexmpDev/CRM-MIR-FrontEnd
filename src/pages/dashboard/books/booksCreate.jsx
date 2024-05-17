@@ -66,7 +66,7 @@ export function BooksCreate() {
                             className="border-t-blue-gray-200 focus:border-t-gray-900"
                         />
                     </div>
-                    <Button type="submit" className="mt-6" fullWidth>Edit</Button>
+                    <Button type="submit" className="mt-6" fullWidth>Create</Button>
                 </form>
                 <div className="mt-6 flex justify-center w-full">
                     <Link to="/dashboard/books"><Button>Return</Button></Link>
