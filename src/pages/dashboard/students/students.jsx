@@ -65,7 +65,7 @@ export function Students() {
                         </thead>
                         <tbody>
                             {students.map(
-                                ({ id, photo, name, surname1, surname2, birthDate, curs, leave }, key) => {
+                                ({ id, photo, name, surname1, surname2, birthDate, course, leave }, key) => {
                                     const className = `py-3 px-5 ${key === students.length - 1
                                         ? ""
                                         : "border-b border-blue-gray-50"
@@ -112,7 +112,7 @@ export function Students() {
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {curs}
+                                                    {course.curs}
                                                 </Typography>
                                             </td>
                                             <td className={className}>

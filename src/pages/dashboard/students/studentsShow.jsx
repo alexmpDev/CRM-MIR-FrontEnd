@@ -9,6 +9,7 @@ export function StudentsShow() {
     const dispatch = useDispatch();
     const { id } = useParams();
 
+    console.log(student)
     useEffect(() => {
         dispatch(listOne(id));
     }, []);
@@ -33,8 +34,12 @@ export function StudentsShow() {
                         <Typography variant="paragraph">{student.surname2}</Typography>
                     </div>
                     <div className="mb-6">
+                        <Typography variant="small" color="blue-gray" className="font-medium">Email:</Typography>
+                        <Typography variant="paragraph">{student.email}</Typography>
+                    </div>
+                    <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">Curs:</Typography>
-                        <Typography variant="paragraph">{student.curs}</Typography>
+                        <Typography variant="paragraph">{student.course?.curs}</Typography>
                     </div>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">DNI:</Typography>

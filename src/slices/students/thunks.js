@@ -1,4 +1,4 @@
-import { setStudents, setStudent } from "./studentsSlice"
+import { setStudents, setStudent, setCourses } from "./studentsSlice"
 
 export const listAll = () => {
     return async (dispatch, getState) => {
@@ -16,6 +16,32 @@ export const listAll = () => {
 
                 if (response) {
                     dispatch(setStudents(response))
+                }
+            }
+            list()
+        } catch (error) {
+            console.log(error);
+            alert("Catchch");
+        }
+    }
+}
+
+export const listAllCourses = () => {
+    return async (dispatch, getState) => {
+        try {
+
+            const list = async () => {
+                const data = await fetch(process.env.API_URL + "/api/course", {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    method: "GET",
+                })
+                const response = await data.json()
+
+                if (response) {
+                    dispatch(setCourses(response))
                 }
             }
             list()
@@ -60,7 +86,8 @@ export const edit = (payload, id) => {
             formData.append("name", payload.name);
             formData.append("surname1", payload.surname1);
             formData.append("surname2", payload.surname2);
-            formData.append("curs", payload.curs);
+            formData.append("email", payload.email);
+            formData.append("course_id", payload.course_id);
             formData.append("dni", payload.dni);
             formData.append("birthDate", payload.birthDate);
             formData.append("leave", payload.leave);
@@ -110,7 +137,8 @@ export const create = (payload) => {
             formData.append("name", payload.name);
             formData.append("surname1", payload.surname1);
             formData.append("surname2", payload.surname2);
-            formData.append("curs", payload.curs);
+            formData.append("email", payload.email);
+            formData.append("course_id", payload.course_id);
             formData.append("dni", payload.dni);
             formData.append("birthDate", payload.birthDate);
             formData.append("leave", payload.leave);

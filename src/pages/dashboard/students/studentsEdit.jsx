@@ -6,19 +6,21 @@ import {
     select,
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from 'react-redux';
-import { edit, listAll, listOne } from "@/slices/students/thunks";
+import { edit, listAll, listAllCourses, listOne } from "@/slices/students/thunks";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { useState } from "react";
 export function StudentsEdit() {
 
     const { student } = useSelector(state => state.students)
+    const { courses } = useSelector(state => state.students)
     const navigate = useNavigate();
     const { id } = useParams();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(listOne(id));
+        dispatch(listAllCourses())
     }, []);
 
     console.log(student)
@@ -27,7 +29,8 @@ export function StudentsEdit() {
         data.name ? "" : data.name = student.name
         data.surname1 ? "" : data.surname1 = student.surname1
         data.surname2 ? "" : data.surname2 = student.surname2
-        data.curs ? "" : data.curs = student.curs
+        data.email ? "" : data.email = student.email
+        data.course_id ? "" : data.course_id = student.course.id
         data.dni ? "" : data.dni = student.dni
         data.birthDate ? "" : data.birthDate = student.birthDate
         console.log(id)
@@ -75,14 +78,29 @@ export function StudentsEdit() {
                         />
                     </div>
                     <div className="mb-6">
-                        <Typography variant="small" color="blue-gray" className="font-medium">Curs</Typography>
+                        <Typography variant="small" color="blue-gray" className="font-medium">Email</Typography>
                         <Input
-                            {...register('curs')}
+                            {...register('email')}
                             type="text"
-                            defaultValue={student.curs}
+                            defaultValue={student.email}
                             size="lg"
                             className="border-t-blue-gray-200 focus:border-t-gray-900"
                         />
+                    </div>
+                    <div className="mb-6">
+                        <Typography variant="small" color="blue-gray" className="font-medium">Curs</Typography>
+                        <select
+                            {...register('course_id',)}
+                            className="border-t-blue-gray-200 focus:border-t-gray-900 w-full py-2 px-4 rounded-md"
+                        >
+                            {courses.map(course => (
+                                <option key={course.id} value={course.id} selected={course.id === 2}>
+                                    {course.curs}
+                                </option>
+                            ))}
+
+                        </select>
+                        {errors.course_id && <span className="text-red-500">Curs is required</span>}
                     </div>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">DNI</Typography>

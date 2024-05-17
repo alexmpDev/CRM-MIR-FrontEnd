@@ -4,7 +4,8 @@ const studentSlice = createSlice({
     name: 'student',
     initialState: {
         students: [],
-        student: []
+        student: [],
+        courses: []
     },
     reducers: {
         setStudents: (state, action) => {
@@ -13,8 +14,11 @@ const studentSlice = createSlice({
         setStudent: (state, action) => {
             state.student = action.payload
         },
+        setCourses: (state, action) => {
+            state.courses = action.payload
+        },
     },
 })
 
-export const { setStudents, setStudent} = studentSlice.actions
+export const { setStudents, setStudent, setCourses} = studentSlice.actions
 export const studentReducer = studentSlice.reducer

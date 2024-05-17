@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useDebugValue, useEffect } from "react";
 import {
     Input,
     Button,
     Typography,
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from 'react-redux';
-import { create } from "@/slices/students/thunks"; // Assuming you have a create thunk
+import { create, listAllCourses } from "@/slices/students/thunks"; // Assuming you have a create thunk
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 
@@ -16,6 +16,11 @@ export function StudentsCreate() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(listAllCourses())
+    }, [])
+
+    const { courses } = useSelector(state => state.students)
 
     const onSubmit = async (data) => {
         await dispatch(create(data));
@@ -62,14 +67,28 @@ export function StudentsCreate() {
                         {errors.surname2 && <span className="text-red-500">Surname2 is required</span>}
                     </div>
                     <div className="mb-6">
-                        <Typography variant="small" color="blue-gray" className="font-medium">Curs</Typography>
+                        <Typography variant="small" color="blue-gray" className="font-medium">Email</Typography>
                         <Input
-                            {...register('curs', { required: true })}
+                            {...register('email', { required: true })}
                             type="text"
                             size="lg"
                             className="border-t-blue-gray-200 focus:border-t-gray-900"
                         />
-                        {errors.curs && <span className="text-red-500">Curs is required</span>}
+                        {errors.email && <span className="text-red-500">email is required</span>}
+                    </div>
+                    <div className="mb-6">
+                        <Typography variant="small" color="blue-gray" className="font-medium">Curs</Typography>
+                        <select
+                            {...register('course_id', { required: true })}
+                            className="border-t-blue-gray-200 focus:border-t-gray-900 w-full py-2 px-4 rounded-md"
+                        >
+                            <option value="">Selecciona una opción</option>
+                            {courses.map(course => (
+                                <option key={course.id} value={course.id}>{course.curs}</option>
+                            ))}
+                            
+                        </select>
+                        {errors.course_id && <span className="text-red-500">Curs is required</span>}
                     </div>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">DNI</Typography>
