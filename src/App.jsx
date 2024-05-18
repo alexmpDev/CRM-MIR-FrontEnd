@@ -15,6 +15,9 @@ import ReservationsCreate from "./pages/dashboard/reservations/reservationsCreat
 import ReservationsShow from "./pages/dashboard/reservations/reservationShow";
 import WcCreate from "./pages/dashboard/wc/wcCreate";
 import WcList from "./pages/dashboard/wc/wcList";
+import EventsEdit from "./pages/dashboard/events/eventsEdit";
+import EventsCreate from "./pages/dashboard/events/eventsCreate";
+import EventsShow from "./pages/dashboard/events/eventsShow";
 import { useDispatch } from "react-redux";
 import { setAuthToken, setDashboard, setName } from "./slices/auth/authSlice";
 
@@ -40,6 +43,10 @@ function App() {
       <Route path="/students/observations/:id" element={<Observations />} />
       <Route path="/students/show/:id" element={<StudentsShow />} />
       <Route path="/students/:id" element={<StudentsEdit />} />
+      <Route path="/events" element={<EventsCreate />} />
+      <Route path="/events/show/:id" element={<EventsShow />} />
+
+      <Route path="/events/:id" element={<EventsEdit />} />
       <Route path="/dashboard/*" element={<Dashboard />} />
       <Route path="/auth/*" element={<Auth />} />
       <Route path="*" element={<Navigate to="/dashboard/home" replace />} />

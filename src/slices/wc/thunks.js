@@ -7,7 +7,8 @@ export const listAll = () => {
                 const data = await fetch(process.env.API_URL + "/api/wc", {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "GET",
                 })
@@ -97,7 +98,8 @@ export const create = (payload) => {
             await fetch(process.env.API_URL + "/api/wc" , {
                 headers: {
                     Accept: "application/json",
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + getState().auth.authToken
                 },
                 method: "POST",
                 body: JSON.stringify(payload)

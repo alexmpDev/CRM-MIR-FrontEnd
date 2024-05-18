@@ -7,7 +7,8 @@ export const listAll = () => {
                 const data = await fetch(process.env.API_URL + "/api/reservations", {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "GET",
                 })
@@ -39,7 +40,8 @@ export const filter = (book_id = null, student_id = null,) => {
                 const data = await fetch(process.env.API_URL + "/api/reservations/filter?"+ params, {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "GET",
                 })
@@ -65,7 +67,8 @@ export const listOne = (id) => {
                 const data = await fetch(process.env.API_URL + "/api/reservations/" + id, {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "GET",
                 })
@@ -90,7 +93,8 @@ export const edit = (id) => {
             await fetch(process.env.API_URL + "/api/reservations/" + id , {
                 headers: {
                     Accept: "application/json",
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + getState().auth.authToken
                 },
                 method: "POST",
                 body:  JSON.stringify([])
@@ -111,6 +115,7 @@ export const del = (id) => {
             await fetch(process.env.API_URL + "/api/reservations/" + id , {
                 headers: {
                     Accept: "application/json",
+                    "Authorization": "Bearer " + getState().auth.authToken
                 },
                 method: "DELETE",
             })
@@ -129,7 +134,8 @@ export const create = (payload) => {
             await fetch(process.env.API_URL + "/api/reservations" , {
                 headers: {
                     Accept: "application/json",
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + getState().auth.authToken
                 },
                 method: "POST",
                 body: JSON.stringify(payload)

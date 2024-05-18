@@ -19,7 +19,8 @@ export const listAll = (title = null, author = null, gender = null) => {
                 const data = await fetch(process.env.API_URL + "/api/books/filter?"+ params, {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "GET",
                 })
@@ -45,7 +46,8 @@ export const listOne = (id) => {
                 const data = await fetch(process.env.API_URL + "/api/books/" + id, {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "GET",
                 })
@@ -71,7 +73,8 @@ export const edit = (payload, id) => {
             await fetch(process.env.API_URL + "/api/books/" + id , {
                 headers: {
                     Accept: "application/json",
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + getState().auth.authToken
                 },
                 method: "PUT",
                 body: JSON.stringify(payload)
@@ -91,6 +94,7 @@ export const del = (id) => {
             await fetch(process.env.API_URL + "/api/books/" + id , {
                 headers: {
                     Accept: "application/json",
+                    "Authorization": "Bearer " + getState().auth.authToken
                 },
                 method: "DELETE",
             })
@@ -109,7 +113,8 @@ export const create = (payload) => {
             await fetch(process.env.API_URL + "/api/books/" , {
                 headers: {
                     Accept: "application/json",
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + getState().auth.authToken
                 },
                 method: "POST",
                 body: JSON.stringify(payload)

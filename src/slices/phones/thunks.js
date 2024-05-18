@@ -10,7 +10,8 @@ export const listAll = (studentId ) => {
                 const data = await fetch(process.env.API_URL + "/api/students/" + studentId + "/phones", {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "GET",
                 })
@@ -37,7 +38,8 @@ export const create = (payload, studentId ) => {
                 const data = await fetch(process.env.API_URL + "/api/students/phoneinfo", {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "POST",
                     body: JSON.stringify(payload)
@@ -59,7 +61,8 @@ export const listOne = (id) => {
                 const data = await fetch(process.env.API_URL + "/api/students/phones/" + id, {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "GET",
                 })
@@ -88,7 +91,8 @@ export const edit = (payload, id) => {
                 const data = await fetch(process.env.API_URL + "/api/students/phoneinfo/" + id, {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "POST",
                     body: JSON.stringify(payload)
@@ -111,7 +115,8 @@ export const del = ( id) => {
                 const data = await fetch(process.env.API_URL + "/api/students/phoneinfo/" + id, {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "DELETE",
                 })

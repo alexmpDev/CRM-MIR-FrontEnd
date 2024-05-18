@@ -6,11 +6,13 @@ import { observationReducer } from './slices/observations/observationsSlice';
 import { reservationsReducer } from './slices/reservations/reservationsSlice';
 import { wcReducer } from './slices/wc/wcSlice';
 import { authReducer } from './slices/auth/authSlice';
+import { eventReducer } from './slices/events/eventsSlice';
 
 
 const store = configureStore({
     reducer: {
         students: studentReducer,
+        events: eventReducer,
         books: bookReducer,
         phones: phoneReducer,
         observations: observationReducer,

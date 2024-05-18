@@ -8,7 +8,8 @@ export const listAll = () => {
                 const data = await fetch(process.env.API_URL + "/api/students", {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "GET",
                 })
@@ -34,7 +35,8 @@ export const listAllCourses = () => {
                 const data = await fetch(process.env.API_URL + "/api/course", {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "GET",
                 })
@@ -60,7 +62,8 @@ export const listOne = (id) => {
                 const data = await fetch(process.env.API_URL + "/api/students/" + id, {
                     headers: {
                         Accept: "application/json",
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + getState().auth.authToken
                     },
                     method: "GET",
                 })
@@ -99,6 +102,7 @@ export const edit = (payload, id) => {
             await fetch(process.env.API_URL + "/api/students/" + id , {
                 headers: {
                     Accept: "application/json",
+                    "Authorization": "Bearer " + getState().auth.authToken
                 },
                 method: "POST",
                 body: formData
@@ -118,6 +122,7 @@ export const del = (id) => {
             await fetch(process.env.API_URL + "/api/students/" + id , {
                 headers: {
                     Accept: "application/json",
+                    "Authorization": "Bearer " + getState().auth.authToken
                 },
                 method: "DELETE",
             })
@@ -150,6 +155,7 @@ export const create = (payload) => {
             await fetch(process.env.API_URL + "/api/students/" , {
                 headers: {
                     Accept: "application/json",
+                    "Authorization": "Bearer " + getState().auth.authToken
                 },
                 method: "POST",
                 body: formData
