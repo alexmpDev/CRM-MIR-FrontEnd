@@ -18,6 +18,7 @@ import WcList from "./pages/dashboard/wc/wcList";
 import EventsEdit from "./pages/dashboard/events/eventsEdit";
 import EventsCreate from "./pages/dashboard/events/eventsCreate";
 import EventsShow from "./pages/dashboard/events/eventsShow";
+import TicketValidation from "./pages/dashboard/events/ticketValidation";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthToken, setDashboard, setName, setRole } from "./slices/auth/authSlice";
 import BookShow from "./pages/dashboard/books/bookShow";
@@ -36,6 +37,7 @@ function App() {
     case 1:
       return (
         <Routes>
+          <Route path="/tickets/validate/:ticketId" element={<TicketValidation/>} />
           <Route path="/books" element={<BooksCreate />} />
           <Route path="/books/show/:id" element={<BookShow />} />
           <Route path="/books/:id" element={<BooksEdit />} />
@@ -64,6 +66,7 @@ function App() {
     case 4:
       return (
         <Routes>
+          <Route path="/tickets/validate/:ticketId" element={<TicketValidation/>} />
           <Route path="/crear-pases-de-bano" element={<WcCreate />} />
           <Route path="/moderar-pases-de-bano" element={<WcList />} />
           <Route path="/students" element={<StudentsCreate />} />
@@ -99,6 +102,7 @@ function App() {
     case 5:
       return (
         <Routes>
+          <Route path="/tickets/validate/:ticketId" element={<TicketValidation/>} />
           <Route path="/students/show/:id" element={<StudentsShow />} />
           <Route path="/dashboard/*" element={<Dashboard />} />
           <Route path="/auth/*" element={<Auth />} />
@@ -107,7 +111,7 @@ function App() {
       )
     default:
       return (
-        <Routes>
+        <Routes>         
           <Route path="/dashboard/*" element={<Dashboard />} />
           <Route path="/auth/*" element={<Auth />} />
           <Route path="*" element={<Navigate to="/dashboard/home" replace />} />

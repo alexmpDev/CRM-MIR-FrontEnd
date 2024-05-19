@@ -84,7 +84,7 @@ export function Reservations() {
                         </thead>
                         <tbody>
                             {reservations.map(
-                                ({ id, book_id, student_id, return_date, returned }, key) => {
+                                ({ id, book_id, student_id, return_date, returned, student , book }, key) => {
                                     const className = `py-3 px-5 ${key === reservations.length - 1
                                         ? ""
                                         : "border-b border-blue-gray-50"
@@ -95,13 +95,13 @@ export function Reservations() {
                                             <Link to={"/reservations/show/" + id}>
                                                 <td className={className}>
                                                     <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                        {book_id}
+                                                        {book.title}
                                                     </Typography>
                                                 </td>
                                             </Link>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {student_id}
+                                                    {student.name}
                                                 </Typography>
                                             </td>
                                             <td className={className}>

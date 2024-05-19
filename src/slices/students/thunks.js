@@ -93,7 +93,7 @@ export const edit = (payload, id) => {
             formData.append("course_id", payload.course_id);
             formData.append("dni", payload.dni);
             formData.append("birthDate", payload.birthDate);
-            formData.append("leave", payload.leave);
+            formData.append("leave", payload.leave); // Convertir leave a 0 o 1
             console.log(payload.photo)
             if (payload.photo.length > 0) {
                 formData.append("photo", payload.photo[0]); // Se adjunta el archivo solo si existe
@@ -146,7 +146,7 @@ export const create = (payload) => {
             formData.append("course_id", payload.course_id);
             formData.append("dni", payload.dni);
             formData.append("birthDate", payload.birthDate);
-            formData.append("leave", payload.leave);
+            formData.append("leave", payload.leave ? 1 : 0); // Convertir leave a 0 o 1
             console.log(payload.photo)
             if (payload.photo.length > 0) {
                 formData.append("photo", payload.photo[0]); // Se adjunta el archivo solo si existe
@@ -167,4 +167,5 @@ export const create = (payload) => {
         }
     }
 }
+
 

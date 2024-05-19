@@ -93,12 +93,18 @@ export function StudentsCreate() {
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">DNI</Typography>
                         <Input
-                            {...register('dni', { required: true })}
+                            {...register('dni', { 
+                                required: true, 
+                                pattern: {
+                                    value: /^[XYZ]?\d{7,8}[A-Z]$/,
+                                    message: "Invalid DNI/NIE format"
+                                }
+                            })}
                             type="text"
                             size="lg"
                             className="border-t-blue-gray-200 focus:border-t-gray-900"
                         />
-                        {errors.dni && <span className="text-red-500">DNI is required</span>}
+                        {errors.dni && <span className="text-red-500">{errors.dni.message}</span>}
                     </div>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">BirthDate</Typography>

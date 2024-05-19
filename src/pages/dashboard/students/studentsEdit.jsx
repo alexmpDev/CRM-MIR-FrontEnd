@@ -105,12 +105,18 @@ export function StudentsEdit() {
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">DNI</Typography>
                         <Input
-                            {...register('dni')}
+                            {...register('dni', { 
+                                pattern: {
+                                    value: /^[XYZ]?\d{7,8}[A-Z]$/,
+                                    message: "Invalid DNI/NIE format"
+                                }
+                            })}
                             type="text"
                             defaultValue={student.dni}
                             size="lg"
                             className="border-t-blue-gray-200 focus:border-t-gray-900"
                         />
+                        {errors.dni && <span className="text-red-500">{errors.dni.message}</span>}
                     </div>
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">BirthDate</Typography>
@@ -138,8 +144,8 @@ export function StudentsEdit() {
                             defaultValue={student.leave}
                             className="rounded border-gray-300 text-blue-500 focus:border-t-gray-900 focus:ring-t-gray-900"
                         >
-                            <option value="true" selected={student.leave === "true"}>Yes</option>
-                            <option value="false" selected={student.leave === "false"}>No</option>
+                            <option value="1" selected={student.leave == "1"}>Yes</option>
+                            <option value="0" selected={student.leave == "0"}>No</option>
                         </select>
                         <label htmlFor="leave" className="ml-2 text-sm text-blue-gray-700">Can leave in yard</label>
                     </div>

@@ -242,3 +242,26 @@ export const checkTicketsGenerated = (eventId) => {
     };
 };
 
+export const validateTicket = (ticketId) => {
+    return async (dispatch, getState) => {
+        try {
+            const response = await fetch(`${process.env.API_URL}/api/tickets/validate/${ticketId}`, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + getState().auth.authToken
+                },
+                method: "GET",
+            });
+            const data = await response.json();
+            if (response.ok) {
+                return data.message;
+            } else {
+                throw new Error(data.message || "Something went wrong");
+            }
+        } catch (error) {
+            console.log(error);
+            return error.message;
+        }
+    };
+};

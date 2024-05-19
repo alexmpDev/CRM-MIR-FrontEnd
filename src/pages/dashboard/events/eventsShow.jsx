@@ -84,7 +84,9 @@ export function EventsShow() {
                     {event?.courses?.length > 0 ? (
                         <>
                             <div className="mt-6 flex justify-center w-full">
-                                <Button className="mr-2" onClick={handleUnassignCourses}>Unassign Courses</Button>
+                                {!ticketsGenerated && (
+                                    <Button className="mr-2" onClick={handleUnassignCourses}>Unassign Courses</Button>
+                                )}
                                 {!ticketsGenerated && (
                                     <Button onClick={handleGenerateTickets}>Generate Tickets</Button>
                                 )}

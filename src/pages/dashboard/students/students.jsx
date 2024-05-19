@@ -118,7 +118,7 @@ export function Students() {
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {((currentDate.getFullYear() - new Date(birthDate).getFullYear()) >= 18 || leave == 'true') ? (
+                                                    {((currentDate.getFullYear() - new Date(birthDate).getFullYear()) >= 18 || leave == 'true' || leave == "1") ? (
                                                         <span role="img" aria-label="Tick">✔️</span>
                                                     ) : (
                                                         <span role="img" aria-label="Cross">❌</span>

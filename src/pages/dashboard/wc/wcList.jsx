@@ -34,7 +34,7 @@ export function WcList() {
                     <table className="w-full min-w-[640px] table-auto">
                         <thead>
                             <tr>
-                                {["Student_id", "Teacher"].map((el) => (
+                                {["Student_id","Name", "Teacher"].map((el) => (
                                     <th
                                         key={el}
                                         className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -51,7 +51,7 @@ export function WcList() {
                         </thead>
                         <tbody>
                             {validWcEntries.map(
-                                ({ id, student_id, teacher, valid_until }, key) => {
+                                ({ id, student_id, teacher, valid_until, student }, key) => {
                                     const className = `py-3 px-5 ${key === validWcEntries.length - 1
                                         ? ""
                                         : "border-b border-blue-gray-50"
@@ -66,6 +66,11 @@ export function WcList() {
                                                     className="font-semibold"
                                                 >
                                                     {student_id}
+                                                </Typography>
+                                            </td>
+                                            <td className={className}>
+                                                <Typography className="text-xs font-semibold text-blue-gray-600">
+                                                    {student.name}
                                                 </Typography>
                                             </td>
                                             <td className={className}>
