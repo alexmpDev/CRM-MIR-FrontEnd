@@ -1,4 +1,4 @@
-import { setAuthToken, setDashboard, setName } from "./authSlice"
+import { setAuthToken, setDashboard, setName, setRole } from "./authSlice"
 
 
 export const registerAuth = (payload) => {
@@ -41,8 +41,10 @@ export const login = (payload) => {
                 if (response.success) {
                     await localStorage.setItem("user", payload.email)
                     await localStorage.setItem("authToken", response.authToken)
+                    await localStorage.setItem("role", response.role)
                     dispatch(setName(payload.email))
                     dispatch(setAuthToken(response.authToken))
+                    dispatch(setRole(response.role))
                     await dispatch(getDashboard())
                 } else {
                     alert("Wrong credentials")

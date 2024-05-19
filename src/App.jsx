@@ -18,8 +18,8 @@ import WcList from "./pages/dashboard/wc/wcList";
 import EventsEdit from "./pages/dashboard/events/eventsEdit";
 import EventsCreate from "./pages/dashboard/events/eventsCreate";
 import EventsShow from "./pages/dashboard/events/eventsShow";
-import { useDispatch } from "react-redux";
-import { setAuthToken, setDashboard, setName } from "./slices/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthToken, setDashboard, setName, setRole } from "./slices/auth/authSlice";
 import BookShow from "./pages/dashboard/books/bookShow";
 
 function App() {
@@ -27,33 +27,95 @@ function App() {
   dispatch(setName(localStorage.getItem('user')))
   dispatch(setAuthToken(localStorage.getItem('authToken')))
   dispatch(setDashboard(localStorage.getItem('menu')))
-  return (
-    <Routes>
-      <Route path="/crear-pases-de-bano" element={<WcCreate />} />
-      <Route path="/moderar-pases-de-bano" element={<WcList />} />
-      <Route path="/books" element={<BooksCreate />} />
-      <Route path="/books/show/:id" element={<BookShow />} />
-      <Route path="/books/:id" element={<BooksEdit />} />
-      <Route path="/reservations" element={<ReservationsCreate />} />
-      <Route path="/reservations/show/:id" element={<ReservationsShow />} />
-      <Route path="/students" element={<StudentsCreate />} />
-      <Route path="/students/phone/edit/:id" element={<PhoneEdit />} />
-      <Route path="/students/observations/create/:id" element={<ObservationCreate />} />
-      <Route path="/students/observations/edit/:id" element={<ObservationEdit />} />
-      <Route path="/students/phone/create/:id" element={<PhoneCreate />} />
-      <Route path="/students/phone/:id" element={<Phones />} />
-      <Route path="/students/observations/:id" element={<Observations />} />
-      <Route path="/students/show/:id" element={<StudentsShow />} />
-      <Route path="/students/:id" element={<StudentsEdit />} />
-      <Route path="/events" element={<EventsCreate />} />
-      <Route path="/events/show/:id" element={<EventsShow />} />
+  dispatch(setRole(localStorage.getItem('role')))
 
-      <Route path="/events/:id" element={<EventsEdit />} />
-      <Route path="/dashboard/*" element={<Dashboard />} />
-      <Route path="/auth/*" element={<Auth />} />
-      <Route path="*" element={<Navigate to="/dashboard/home" replace />} />
-    </Routes>
-  );
+  const { role } = useSelector(state => state.auth)
+  console.log(role);
+
+  switch (role) {
+    case 1:
+      return (
+        <Routes>
+          <Route path="/books" element={<BooksCreate />} />
+          <Route path="/books/show/:id" element={<BookShow />} />
+          <Route path="/books/:id" element={<BooksEdit />} />
+          <Route path="/reservations" element={<ReservationsCreate />} />
+          <Route path="/reservations/show/:id" element={<ReservationsShow />} />
+          <Route path="/crear-pases-de-bano" element={<WcCreate />} />
+          <Route path="/moderar-pases-de-bano" element={<WcList />} />
+          <Route path="/students" element={<StudentsCreate />} />
+          <Route path="/students/phone/edit/:id" element={<PhoneEdit />} />
+          <Route path="/students/observations/create/:id" element={<ObservationCreate />} />
+          <Route path="/students/observations/edit/:id" element={<ObservationEdit />} />
+          <Route path="/students/phone/create/:id" element={<PhoneCreate />} />
+          <Route path="/students/phone/:id" element={<Phones />} />
+          <Route path="/students/observations/:id" element={<Observations />} />
+          <Route path="/students/:id" element={<StudentsEdit />} />
+          <Route path="/events" element={<EventsCreate />} />
+          <Route path="/events/show/:id" element={<EventsShow />} />
+          <Route path="/events/:id" element={<EventsEdit />} />
+          <Route path="/students/show/:id" element={<StudentsShow />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/auth/*" element={<Auth />} />
+          <Route path="*" element={<Navigate to="/dashboard/home" replace />} />
+        </Routes>
+      );
+    case 2:
+    case 4:
+      return (
+        <Routes>
+          <Route path="/crear-pases-de-bano" element={<WcCreate />} />
+          <Route path="/moderar-pases-de-bano" element={<WcList />} />
+          <Route path="/students" element={<StudentsCreate />} />
+          <Route path="/students/phone/edit/:id" element={<PhoneEdit />} />
+          <Route path="/students/observations/create/:id" element={<ObservationCreate />} />
+          <Route path="/students/observations/edit/:id" element={<ObservationEdit />} />
+          <Route path="/students/phone/create/:id" element={<PhoneCreate />} />
+          <Route path="/students/phone/:id" element={<Phones />} />
+          <Route path="/students/observations/:id" element={<Observations />} />
+          <Route path="/students/:id" element={<StudentsEdit />} />
+          <Route path="/events" element={<EventsCreate />} />
+          <Route path="/events/show/:id" element={<EventsShow />} />
+          <Route path="/events/:id" element={<EventsEdit />} />
+          <Route path="/students/show/:id" element={<StudentsShow />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/auth/*" element={<Auth />} />
+          <Route path="*" element={<Navigate to="/dashboard/home" replace />} />
+        </Routes>
+      );
+    case 3:
+      return (
+        <Routes>
+          <Route path="/books" element={<BooksCreate />} />
+          <Route path="/books/show/:id" element={<BookShow />} />
+          <Route path="/books/:id" element={<BooksEdit />} />
+          <Route path="/reservations" element={<ReservationsCreate />} />
+          <Route path="/reservations/show/:id" element={<ReservationsShow />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/auth/*" element={<Auth />} />
+          <Route path="*" element={<Navigate to="/dashboard/home" replace />} />
+        </Routes>
+      );
+    case 5:
+      return (
+        <Routes>
+          <Route path="/students/show/:id" element={<StudentsShow />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/auth/*" element={<Auth />} />
+          <Route path="*" element={<Navigate to="/dashboard/home" replace />} />
+        </Routes>
+      )
+    default:
+      return (
+        <Routes>
+          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/auth/*" element={<Auth />} />
+          <Route path="*" element={<Navigate to="/dashboard/home" replace />} />
+        </Routes>
+      )
+  }
+ 
+
 }
 
 export default App;
