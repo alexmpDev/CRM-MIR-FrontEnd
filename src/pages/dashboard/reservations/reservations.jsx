@@ -20,7 +20,7 @@ export function Reservations() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const handleFilter = async (data) => {
         console.log(data)
-        await dispatch(filter(data.book_id, data.student_id, ));
+        await dispatch(filter(data.book_id, data.student_id,));
     };
 
     const handleDelete = async (event) => {
@@ -41,6 +41,7 @@ export function Reservations() {
         dispatch(listAll());
     };
 
+    const { role } = useSelector(state => state.auth);
     const { reservations } = useSelector(state => state.reservations)
 
     return (
@@ -56,7 +57,7 @@ export function Reservations() {
                             <input type="text" placeholder="student_id" class="border border-black p-1 flex-1 text-black" {...register("student_id", { required: false })} />
 
                             <button type="submit" class=" p-1 bg-gray-900 hover:bg-gray-800">FILTER</button>
-                        </form> 
+                        </form>
                     </div>
                     <Link to="/reservations">
                         <Button>+</Button>
@@ -126,20 +127,22 @@ export function Reservations() {
                                                     </form>
                                                 </Typography>
                                             </td>
-                                            <td className={className}>
+                                            {role == 1 && (
+                                                <td className={className}>
 
-                                                <Typography
-                                                    as="a"
-                                                    className="text-xs font-semibold text-blue-gray-600"
-                                                >
-                                                    <form onSubmit={handleDelete}>
-                                                        <button type="submit">
-                                                            <input type="hidden" name="id" value={id} />
-                                                            Delete
-                                                        </button>
-                                                    </form>
-                                                </Typography>
-                                            </td>
+                                                    <Typography
+                                                        as="a"
+                                                        className="text-xs font-semibold text-blue-gray-600"
+                                                    >
+                                                        <form onSubmit={handleDelete}>
+                                                            <button type="submit">
+                                                                <input type="hidden" name="id" value={id} />
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                    </Typography>
+                                                </td>
+                                            )}
                                         </tr>
                                     );
                                 }

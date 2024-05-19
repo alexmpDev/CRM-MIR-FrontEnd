@@ -36,6 +36,7 @@ export function Books() {
         dispatch(listAll());
     }
 
+    const { role } = useSelector(state => state.auth);
     const { books } = useSelector(state => state.books)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const currentDate = new Date();
@@ -122,20 +123,22 @@ export function Books() {
                                                     Edit
                                                 </Typography>
                                             </td>
-                                            <td className={className}>
+                                            {role == 1 && (
+                                                <td className={className}>
 
-                                                <Typography
-                                                    as="a"
-                                                    className="text-xs font-semibold text-blue-gray-600"
-                                                >
-                                                    <form onSubmit={handleDelete}>
-                                                        <button type="submit">
-                                                            <input type="hidden" name="id" value={id} />
-                                                            Delete
-                                                        </button>
-                                                    </form>
-                                                </Typography>
-                                            </td>
+                                                    <Typography
+                                                        as="a"
+                                                        className="text-xs font-semibold text-blue-gray-600"
+                                                    >
+                                                        <form onSubmit={handleDelete}>
+                                                            <button type="submit">
+                                                                <input type="hidden" name="id" value={id} />
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                    </Typography>
+                                                </td>
+                                            )}
                                         </tr>
                                     );
                                 }

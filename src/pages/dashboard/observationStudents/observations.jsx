@@ -34,7 +34,8 @@ export function Observations() {
         dispatch(listAll(id));
     }
 
-    const {observations}  = useSelector(state => state.observations)
+    const { role } = useSelector(state => state.auth);
+    const { observations } = useSelector(state => state.observations)
     console.log(observations)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const currentDate = new Date();
@@ -96,20 +97,22 @@ export function Observations() {
                                                     Edit
                                                 </Typography>
                                             </td>
-                                            <td className={className}>
+                                            {role == 1 && (
+                                                <td className={className}>
 
-                                                <Typography
-                                                    as="a"
-                                                    className="text-xs font-semibold text-blue-gray-600"
-                                                >
-                                                    <form onSubmit={handleDelete}>
-                                                        <button type="submit">
-                                                            <input type="hidden" name="id" value={id} />
-                                                            Delete
-                                                        </button>
-                                                    </form>
-                                                </Typography>
-                                            </td>
+                                                    <Typography
+                                                        as="a"
+                                                        className="text-xs font-semibold text-blue-gray-600"
+                                                    >
+                                                        <form onSubmit={handleDelete}>
+                                                            <button type="submit">
+                                                                <input type="hidden" name="id" value={id} />
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                    </Typography>
+                                                </td>
+                                            )}
                                         </tr>
                                     );
                                 }

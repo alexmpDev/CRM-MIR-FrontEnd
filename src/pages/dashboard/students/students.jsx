@@ -32,6 +32,7 @@ export function Students() {
         dispatch(listAll());
     }
 
+    const { role } = useSelector(state => state.auth);
     const { students } = useSelector(state => state.students)
     console.log(students)
     const currentDate = new Date();
@@ -134,20 +135,21 @@ export function Students() {
                                                 </Typography>
 
                                             </td>
-                                            <td className={className}>
-
-                                                <Typography
-                                                    as="a"
-                                                    className="text-xs font-semibold text-blue-gray-600"
-                                                >
-                                                    <form onSubmit={handleSubmit}>
-                                                        <button type="submit">
-                                                            <input type="hidden" name="id" value={id} />
-                                                            Delete
-                                                        </button>
-                                                    </form>
-                                                </Typography>
-                                            </td>
+                                            {role == 1 && (
+                                                < td className={className}>
+                                                    <Typography
+                                                        as="a"
+                                                        className="text-xs font-semibold text-blue-gray-600"
+                                                    >
+                                                        <form onSubmit={handleSubmit}>
+                                                            <button type="submit">
+                                                                <input type="hidden" name="id" value={id} />
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                    </Typography>
+                                                </td>
+                                            )}
                                         </tr>
                                     );
                                 }

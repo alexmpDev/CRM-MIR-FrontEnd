@@ -19,7 +19,7 @@ const authSlice = createSlice({
             state.dashboard = action.payload
         },
         setRole: (state, action) => {
-            state.role = 5
+            state.role = parseInt(action.payload)
         },
     },
 })
