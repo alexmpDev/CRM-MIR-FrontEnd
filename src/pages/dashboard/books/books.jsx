@@ -87,15 +87,17 @@ export function Books() {
 
                                     return (
                                         <tr key={title}>
-                                            <td className={className}>
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-semibold"
-                                                >
-                                                    {title}
-                                                </Typography>
-                                            </td>
+                                            <Link to={"/books/show/" + id}>
+                                                <td className={className}>
+                                                    <Typography
+                                                        variant="small"
+                                                        color="blue-gray"
+                                                        className="font-semibold"
+                                                    >
+                                                        {title}
+                                                    </Typography>
+                                                </td>
+                                            </Link>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
                                                     {author}

@@ -20,6 +20,7 @@ import EventsCreate from "./pages/dashboard/events/eventsCreate";
 import EventsShow from "./pages/dashboard/events/eventsShow";
 import { useDispatch } from "react-redux";
 import { setAuthToken, setDashboard, setName } from "./slices/auth/authSlice";
+import BookShow from "./pages/dashboard/books/bookShow";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
       <Route path="/crear-pases-de-bano" element={<WcCreate />} />
       <Route path="/moderar-pases-de-bano" element={<WcList />} />
       <Route path="/books" element={<BooksCreate />} />
+      <Route path="/books/show/:id" element={<BookShow />} />
       <Route path="/books/:id" element={<BooksEdit />} />
       <Route path="/reservations" element={<ReservationsCreate />} />
       <Route path="/reservations/show/:id" element={<ReservationsShow />} />
