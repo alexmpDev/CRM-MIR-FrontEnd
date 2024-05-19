@@ -34,7 +34,7 @@ export function Home() {
         <h1 className="text-3xl font-bold mb-4">Bienvenido a CRM-MIR</h1>
         <img src="/img/jmir.jpeg" alt="Imagen de la app" className="mx-auto rounded-lg shadow-lg w-3/4 md:w-1/2 lg:w-1.8/3" />
         <p className="mt-4 text-lg text-gray-700">
-          El proyecto consiste en substituir les antigues targetes de cartó per un sistema de QR personalitzat per a cada alumne. Aquest QR serà utilitzat per l'equip docent per a gestionar i monitoritzar diverses activitats escolars. A més de la gestió del lavabo, el sistema inclourà funcionalitats com una versió actualitzada del carnet d'estudiants per a una gestió més eficaç de la informació, així com un sistema de registre i préstec de llibres de la biblioteca. També incorporarà una funcionalitat de gestió d'esdeveniments, ampliant la utilitat del sistema més enllà de les necessitats immedi
+          The project involves replacing the old cardboard cards with a personalized QR system for each student. This QR will be used by the teaching staff to manage and monitor various school activities. In addition to restroom management, the system will include features such as an updated version of the student ID card for more efficient information management, as well as a system for registering and borrowing library books. It will also incorporate an event management functionality, extending the system's utility beyond immediate needs.        
         </p>
       </header>
     </div>

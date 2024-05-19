@@ -31,7 +31,10 @@ export function ReservationsCreate() {
     console.log(students)
     console.log(reservations)
 
-    const reservedBookIds = reservations.map(reservation => reservation.book_id);
+    const reservedBookIds = reservations
+        .filter(reservation => !reservation.returned)
+        .map(reservation => reservation.book_id);
+
     const availableBooks = books.filter(book => !reservedBookIds.includes(book.id));
 
     const onSubmit = async (data) => {

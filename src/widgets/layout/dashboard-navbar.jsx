@@ -34,6 +34,7 @@ export function DashboardNavbar() {
     localStorage.removeItem("user")
     localStorage.removeItem("menu")
     localStorage.removeItem("authToken")
+    navigate("/dashboard/home")
   }
   return (
     <Navbar
