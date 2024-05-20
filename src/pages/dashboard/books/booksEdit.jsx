@@ -23,7 +23,6 @@ export function BooksEdit() {
     }, []);
 
     const onSubmit = async (data) => {
-        console.log(data);
         data.title ? "" : data.title = book.title
         data.author ? "" : data.author = book.author
         data.isbn ? "" : data.isbn = book.isbn

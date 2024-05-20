@@ -27,9 +27,7 @@ export function ReservationsCreate() {
     const { students } = useSelector(state => state.students)
     const { reservations } = useSelector(state => state.reservations)
 
-    console.log(books)
-    console.log(students)
-    console.log(reservations)
+
 
     const reservedBookIds = reservations
         .filter(reservation => !reservation.returned)

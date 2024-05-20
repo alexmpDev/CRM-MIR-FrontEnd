@@ -25,7 +25,6 @@ export function Dashboard() {
   if (dashboard) {
     routes[0].pages = JSON.parse(dashboard)
   }
-  console.log(routes)
 
   function getRoute(name, path) {
     switch (name) {
@@ -56,7 +55,10 @@ export function Dashboard() {
       />
       <div className="p-4 xl:ml-80">
         <DashboardNavbar />
-        <Configurator />
+        <Configurator  routes={routes}
+        brandImg={
+          sidenavType === "dark" ? "/img/logo-ct.png" : "/img/logo-ct-dark.png"
+        }/>
         <IconButton
           size="lg"
           color="white"

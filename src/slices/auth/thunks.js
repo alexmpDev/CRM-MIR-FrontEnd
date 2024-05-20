@@ -37,7 +37,7 @@ export const login = (payload) => {
                     body: JSON.stringify(payload)
                 })
                 const response = await data.json()
-                console.log(response)
+
                 if (response.success) {
                     await localStorage.setItem("user", payload.email)
                     await localStorage.setItem("authToken", response.authToken)

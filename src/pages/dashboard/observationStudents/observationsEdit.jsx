@@ -20,9 +20,9 @@ export function ObservationEdit() {
     const dispatch = useDispatch();
 
     const {selectedObservation} = useSelector(state => state.observations)
-    console.log(selectedObservation)
+
     const onSubmit = async (data) => {
-        console.log(data);
+
         data.name ? "" : data.name = selectedObservation.observations
         await dispatch(edit(data, id));
         navigate("/students/observations/" + selectedObservation.student_id);

@@ -20,9 +20,9 @@ export function PhoneEdit() {
     const dispatch = useDispatch();
 
     const {selectedPhone} = useSelector(state => state.phones)
-    console.log(selectedPhone)
+
     const onSubmit = async (data) => {
-        console.log(data);
+
         data.name ? "" : data.name = selectedPhone.name
         data.phone ? "" : data.phone = selectedPhone.phone
         await dispatch(edit(data, id));

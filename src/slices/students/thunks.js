@@ -94,11 +94,11 @@ export const edit = (payload, id) => {
             formData.append("dni", payload.dni);
             formData.append("birthDate", payload.birthDate);
             formData.append("leave", payload.leave); 
-            console.log(payload.photo)
+
             if (payload.photo.length > 0) {
                 formData.append("photo", payload.photo[0]); // Se adjunta el archivo solo si existe
             }
-            console.log(formData)
+
             await fetch(process.env.API_URL + "/api/students/" + id , {
                 headers: {
                     Accept: "application/json",
@@ -147,11 +147,11 @@ export const create = (payload) => {
             formData.append("dni", payload.dni);
             formData.append("birthDate", payload.birthDate);
             formData.append("leave", payload.leave ? 1 : 0); // Convertir leave a 0 o 1
-            console.log(payload.photo)
+
             if (payload.photo.length > 0) {
                 formData.append("photo", payload.photo[0]); // Se adjunta el archivo solo si existe
             }
-            console.log(formData)
+
             await fetch(process.env.API_URL + "/api/students" , {
                 headers: {
                     Accept: "application/json",

@@ -24,9 +24,6 @@ export function EventsShow() {
         fetchData();
     }, [dispatch, id]);
 
-    useEffect(() => {
-        console.log("Courses in component:", courses); // Añadido para depuración
-    }, [courses]);
 
     const handleAssignCourses = () => {
         dispatch(assignCoursesToEvent(id, selectedCourses)).then(() => {

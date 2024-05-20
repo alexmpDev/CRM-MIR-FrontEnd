@@ -31,7 +31,6 @@ function App() {
   dispatch(setRole(localStorage.getItem('role')))
 
   const { role } = useSelector(state => state.auth)
-  console.log(role);
 
   switch (role) {
     case 1:

@@ -35,7 +35,7 @@ export function Phones() {
     }
     const { role } = useSelector(state => state.auth);
     const { phones } = useSelector(state => state.phones)
-    console.log(phones)
+
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const currentDate = new Date();
     return (

@@ -36,7 +36,7 @@ export function Observations() {
 
     const { role } = useSelector(state => state.auth);
     const { observations } = useSelector(state => state.observations)
-    console.log(observations)
+
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const currentDate = new Date();
     return (
