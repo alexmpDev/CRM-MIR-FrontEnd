@@ -11,11 +11,17 @@ export function EventsShow() {
     const [selectedCourses, setSelectedCourses] = useState([]);
     const [ticketsGenerated, setTicketsGenerated] = useState(false);
     const [ticketsMessage, setTicketsMessage] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        dispatch(listOne(id));
-        dispatch(listAllCourses());
-        dispatch(checkTicketsGenerated(id)).then(generated => setTicketsGenerated(generated));
+        const fetchData = async () => {
+            await dispatch(listOne(id));
+            await dispatch(listAllCourses());
+            const generated = await dispatch(checkTicketsGenerated(id));
+            setTicketsGenerated(generated);
+            setLoading(false);
+        };
+        fetchData();
     }, [dispatch, id]);
 
     useEffect(() => {
@@ -53,6 +59,14 @@ export function EventsShow() {
             }
         });
     };
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div>Loading...</div>
+            </div>
+        );
+    }
 
     return (
         <div className="mt-12 mb-8 flex justify-center">
@@ -129,7 +143,6 @@ export function EventsShow() {
                     )}
 
                     <div className="mt-6 flex justify-center w-full">
-                        <Link to={"/students/phone/" + id}><Button className="mr-2">Courses</Button></Link>
                         <Link to="/dashboard/events"><Button>Return</Button></Link>
                     </div>
                 </div>

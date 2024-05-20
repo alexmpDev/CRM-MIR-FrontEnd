@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from "react-router-dom";
@@ -8,11 +8,23 @@ export function ReservationsShow() {
     const { reservation } = useSelector(state => state.reservations);
     const dispatch = useDispatch();
     const { id } = useParams();
-    console.log(reservation)
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        dispatch(listOne(id));
-    }, []);
+        const fetchData = async () => {
+            await dispatch(listOne(id));
+            setLoading(false);
+        };
+        fetchData();
+    }, [dispatch, id]);
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div>Loading...</div>
+            </div>
+        );
+    }
 
     return (
         <div className="mt-12 mb-8 flex justify-center">
@@ -36,7 +48,6 @@ export function ReservationsShow() {
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">Returned?</Typography>
                         <Typography variant="paragraph">{reservation.returned == 'true' || reservation.returned == 1 ? <span role="img" aria-label="Tick">✔️</span> : <span role="img" aria-label="Cross">❌</span>}</Typography>
-
                     </div>
                     <div className="mt-6 flex justify-center w-full">
                         <Link to="/dashboard/reservations"><Button>Return</Button></Link>

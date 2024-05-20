@@ -1,40 +1,50 @@
-import { React, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Card,
     CardHeader,
     CardBody,
     Typography,
-    Avatar,
-    Chip,
-    Tooltip,
-    Progress,
     Button
 } from "@material-tailwind/react";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import { authorsTableData, projectsTableData } from "@/data";
 import { useSelector, useDispatch } from 'react-redux';
 import { del, listAll } from "@/slices/events/thunks";
 import { Link, useNavigate } from "react-router-dom";
 
 export function Events() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        dispatch(listAll());
-    }, [])
+        const fetchData = async () => {
+            await dispatch(listAll());
+            setLoading(false);
+        };
+        fetchData();
+    }, [dispatch]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const id = formData.get('id');
-        const ok = confirm("Want to delete this event")
-        ok ? await dispatch(del(id)) : ""
-        dispatch(listAll());
+        const ok = confirm("Want to delete this event");
+        if (ok) {
+            await dispatch(del(id));
+            await dispatch(listAll());
+        }
+    };
+
+    const { events } = useSelector(state => state.events);
+    const currentDate = new Date();
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div>Loading...</div>
+            </div>
+        );
     }
 
-    const { events } = useSelector(state => state.events)
-    console.log(events)
-    const currentDate = new Date();
     return (
         <div className="mt-12 mb-8 flex flex-col gap-12">
             <Card>
@@ -72,8 +82,7 @@ export function Events() {
                                         }`;
 
                                     return (
-
-                                        <tr key={name}>
+                                        <tr key={id}>
                                             <td className={className}>
                                                 <Link to={"/events/show/" + id}>
                                                     <div className="flex items-center gap-4">
@@ -93,13 +102,11 @@ export function Events() {
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
                                                     {description}
                                                 </Typography>
-
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
                                                     {event_date}
                                                 </Typography>
-
                                             </td>
                                             <td className={className}>
                                                 <Typography
@@ -109,10 +116,8 @@ export function Events() {
                                                 >
                                                     Edit
                                                 </Typography>
-
                                             </td>
                                             <td className={className}>
-
                                                 <Typography
                                                     as="a"
                                                     className="text-xs font-semibold text-blue-gray-600"
@@ -133,7 +138,7 @@ export function Events() {
                     </table>
                 </CardBody>
             </Card>
-        </div >
+        </div>
     );
 }
 

@@ -1,49 +1,59 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Input,
     Button,
     Typography,
-    select,
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from 'react-redux';
-import { edit, listAll, listAllCourses, listOne } from "@/slices/students/thunks";
+import { edit, listAllCourses, listOne } from "@/slices/students/thunks";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useForm } from 'react-hook-form';
-import { useState } from "react";
-export function StudentsEdit() {
 
-    const { student } = useSelector(state => state.students)
-    const { courses } = useSelector(state => state.students)
+export function StudentsEdit() {
+    const { student, courses } = useSelector(state => state.students);
     const navigate = useNavigate();
     const { id } = useParams();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(listOne(id));
-        dispatch(listAllCourses())
-    }, []);
+    const [loading, setLoading] = useState(true);
 
-    console.log(student)
+    useEffect(() => {
+        const fetchData = async () => {
+            await dispatch(listOne(id));
+            await dispatch(listAllCourses());
+            setLoading(false);
+        };
+        fetchData();
+    }, [dispatch, id]);
+
     const onSubmit = async (data) => {
-        console.log(data.leave);
-        data.name ? "" : data.name = student.name
-        data.surname1 ? "" : data.surname1 = student.surname1
-        data.surname2 ? "" : data.surname2 = student.surname2
-        data.email ? "" : data.email = student.email
-        data.course_id ? "" : data.course_id = student.course.id
-        data.dni ? "" : data.dni = student.dni
-        data.birthDate ? "" : data.birthDate = student.birthDate
-        console.log(id)
+        data.name = data.name || student.name;
+        data.surname1 = data.surname1 || student.surname1;
+        data.surname2 = data.surname2 || student.surname2;
+        data.email = data.email || student.email;
+        data.course_id = data.course_id || student.course.id;
+        data.dni = data.dni || student.dni;
+        data.birthDate = data.birthDate || student.birthDate;
+        data.photo = data.photo || student.photo;
+        data.leave = data.leave || student.leave;
         await dispatch(edit(data, id));
         navigate("/dashboard/students");
     };
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div>Loading...</div>
+            </div>
+        );
+    }
 
     return (
         <div className="mt-12 mb-8 flex justify-center">
             <div className="w-full lg:w-3/5">
                 <div className="text-center">
                     <Typography variant="h2" className="font-bold mb-4">Edit {student.name}, id: {id}</Typography>
-                    <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Just change the fields you want to Update</Typography>
+                    <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Just change the fields you want to update</Typography>
                 </div>
                 <form className="mt-8 mx-auto w-80 max-w-screen-lg lg:w-1/2" onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-6">
@@ -90,15 +100,14 @@ export function StudentsEdit() {
                     <div className="mb-6">
                         <Typography variant="small" color="blue-gray" className="font-medium">Curs</Typography>
                         <select
-                            {...register('course_id',)}
+                            {...register('course_id')}
                             className="border-t-blue-gray-200 focus:border-t-gray-900 w-full py-2 px-4 rounded-md"
                         >
                             {courses.map(course => (
-                                <option key={course.id} value={course.id} selected={course.id === 2}>
+                                <option key={course.id} value={course.id} selected={course.id === student.course.id}>
                                     {course.curs}
                                 </option>
                             ))}
-
                         </select>
                         {errors.course_id && <span className="text-red-500">Curs is required</span>}
                     </div>

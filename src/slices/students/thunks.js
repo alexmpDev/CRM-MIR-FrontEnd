@@ -70,7 +70,7 @@ export const listOne = (id) => {
                 const response = await data.json()
 
                 if (response) {
-                    dispatch(setStudent(response[0]))
+                    dispatch(setStudent(response))
                 }
             }
             list()
@@ -93,7 +93,7 @@ export const edit = (payload, id) => {
             formData.append("course_id", payload.course_id);
             formData.append("dni", payload.dni);
             formData.append("birthDate", payload.birthDate);
-            formData.append("leave", payload.leave); // Convertir leave a 0 o 1
+            formData.append("leave", payload.leave); 
             console.log(payload.photo)
             if (payload.photo.length > 0) {
                 formData.append("photo", payload.photo[0]); // Se adjunta el archivo solo si existe

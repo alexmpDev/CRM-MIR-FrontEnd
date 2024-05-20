@@ -54,7 +54,7 @@ export const listOne = (id) => {
                 const response = await data.json()
 
                 if (response) {
-                    dispatch(setBook(response[0]))
+                    dispatch(setBook(response))
                 }
             }
             list()

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import { useSelector, useDispatch } from 'react-redux';
 import { listOne } from "@/slices/students/thunks";
@@ -9,24 +9,36 @@ export function StudentsShow() {
     const { role } = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const { id } = useParams();
+    const [loading, setLoading] = useState(true);
 
-    console.log(student)
     useEffect(() => {
-        dispatch(listOne(id));
-    }, []);
+        const fetchData = async () => {
+            await dispatch(listOne(id));
+            setLoading(false);
+        };
+        fetchData();
+    }, [dispatch, id]);
 
     const style = () => {
         if (role != 5) {
-            return "mt-12 mb-8 flex justify-center"
+            return "mt-12 mb-8 flex justify-center";
         }
 
-        if ((new Date().getFullYear() - new Date(student.birthDate).getFullYear()) >= 18 || student.leave == 'true' || student.leave == 1) {
-            return "mt-12 mb-8 flex justify-center bg-green-200"
+        if ((new Date().getFullYear() - new Date(student.birthDate).getFullYear()) >= 18 || student.leave === 'true' || student.leave === 1) {
+            return "mt-12 mb-8 flex justify-center bg-green-200";
         }
 
-        return "mt-12 mb-8 flex justify-center bg-red-200"
+        return "mt-12 mb-8 flex justify-center bg-red-200";
+    };
 
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div>Loading...</div>
+            </div>
+        );
     }
+
     return (
         <div className={style()}>
             <div className="w-full lg:w-3/5">

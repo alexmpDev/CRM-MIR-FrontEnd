@@ -75,7 +75,7 @@ export const listOne = (id) => {
                 const response = await data.json()
 
                 if (response) {
-                    dispatch(setReservation(response[0]))
+                    dispatch(setReservation(response))
                 }
             }
             list()

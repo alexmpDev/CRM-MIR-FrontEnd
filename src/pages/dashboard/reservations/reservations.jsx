@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Card,
     CardHeader,
@@ -12,37 +12,54 @@ import { useForm } from "react-hook-form";
 import { listAll, del, edit, filter } from "@/slices/reservations/thunks";
 
 export function Reservations() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        dispatch(listAll());
-    }, [])
+        const fetchData = async () => {
+            await dispatch(listAll());
+            setLoading(false);
+        };
+        fetchData();
+    }, [dispatch]);
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const handleFilter = async (data) => {
-        console.log(data)
-        await dispatch(filter(data.book_id, data.student_id,));
+        await dispatch(filter(data.book_id, data.student_id));
     };
 
     const handleDelete = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
         const formData = new FormData(event.target);
         const deleteId = formData.get('id');
-        const ok = confirm("Want to delete this reservation")
-        ok ? await dispatch(del(deleteId)) : ""
-        dispatch(listAll());
-    }
+        const ok = confirm("Want to delete this reservation");
+        if (ok) {
+            await dispatch(del(deleteId));
+            await dispatch(listAll());
+        }
+    };
 
     const handleReturn = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
         const formData = new FormData(event.target);
         const returnId = formData.get('id');
-        const ok = confirm("This book have been returned?")
-        ok ? await dispatch(edit(returnId)) : ""
-        dispatch(listAll());
+        const ok = confirm("This book have been returned?");
+        if (ok) {
+            await dispatch(edit(returnId));
+            await dispatch(listAll());
+        }
     };
 
     const { role } = useSelector(state => state.auth);
-    const { reservations } = useSelector(state => state.reservations)
+    const { reservations } = useSelector(state => state.reservations);
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div>Loading...</div>
+            </div>
+        );
+    }
 
     return (
         <div className="mt-12 mb-8 flex flex-col gap-12">
@@ -51,12 +68,11 @@ export function Reservations() {
                     <Typography variant="h6" color="white">
                         Reservations Table
                     </Typography>
-                    <div >
-                        <form onSubmit={handleSubmit(handleFilter)} class="flex gap-4">
-                            <input type="text" placeholder="book_id" class="border border-black p-1 flex-1 text-black" {...register("book_id", { required: false })} />
-                            <input type="text" placeholder="student_id" class="border border-black p-1 flex-1 text-black" {...register("student_id", { required: false })} />
-
-                            <button type="submit" class=" p-1 bg-gray-900 hover:bg-gray-800">FILTER</button>
+                    <div>
+                        <form onSubmit={handleSubmit(handleFilter)} className="flex gap-4">
+                            <input type="text" placeholder="book_id" className="border border-black p-1 flex-1 text-black" {...register("book_id", { required: false })} />
+                            <input type="text" placeholder="student_id" className="border border-black p-1 flex-1 text-black" {...register("student_id", { required: false })} />
+                            <button type="submit" className="p-1 bg-gray-900 hover:bg-gray-800">FILTER</button>
                         </form>
                     </div>
                     <Link to="/reservations">
@@ -84,14 +100,14 @@ export function Reservations() {
                         </thead>
                         <tbody>
                             {reservations.map(
-                                ({ id, book_id, student_id, return_date, returned, student , book }, key) => {
+                                ({ id, book_id, student_id, return_date, returned, student, book }, key) => {
                                     const className = `py-3 px-5 ${key === reservations.length - 1
                                         ? ""
                                         : "border-b border-blue-gray-50"
                                         }`;
 
                                     return (
-                                        <tr key={book_id}>
+                                        <tr key={id}>
                                             <Link to={"/reservations/show/" + id}>
                                                 <td className={className}>
                                                     <Typography className="text-xs font-semibold text-blue-gray-600">
@@ -129,7 +145,6 @@ export function Reservations() {
                                             </td>
                                             {role == 1 && (
                                                 <td className={className}>
-
                                                     <Typography
                                                         as="a"
                                                         className="text-xs font-semibold text-blue-gray-600"
@@ -151,7 +166,7 @@ export function Reservations() {
                     </table>
                 </CardBody>
             </Card>
-        </div >
+        </div>
     );
 }
 

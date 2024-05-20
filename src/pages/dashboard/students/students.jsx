@@ -1,41 +1,52 @@
-import { React, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Card,
     CardHeader,
     CardBody,
     Typography,
     Avatar,
-    Chip,
-    Tooltip,
-    Progress,
     Button
 } from "@material-tailwind/react";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import { authorsTableData, projectsTableData } from "@/data";
 import { useSelector, useDispatch } from 'react-redux';
 import { del, listAll } from "@/slices/students/thunks";
 import { Link, useNavigate } from "react-router-dom";
 
 export function Students() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        dispatch(listAll());
-    }, [])
+        const fetchData = async () => {
+            await dispatch(listAll());
+            setLoading(false);
+        };
+        fetchData();
+    }, [dispatch]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
         const id = formData.get('id');
-        const ok = confirm("Want to delete this student")
-        ok ? await dispatch(del(id)) : ""
-        dispatch(listAll());
-    }
+        const ok = confirm("Want to delete this student");
+        if (ok) {
+            await dispatch(del(id));
+            await dispatch(listAll());
+        }
+    };
 
     const { role } = useSelector(state => state.auth);
-    const { students } = useSelector(state => state.students)
-    console.log(students)
+    const { students } = useSelector(state => state.students);
     const currentDate = new Date();
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div>Loading...</div>
+            </div>
+        );
+    }
+
     return (
         <div className="mt-12 mb-8 flex flex-col gap-12">
             <Card>
@@ -73,8 +84,7 @@ export function Students() {
                                         }`;
 
                                     return (
-
-                                        <tr key={name}>
+                                        <tr key={id}>
                                             <td className={className}>
                                                 <Link to={"/students/show/" + id}>
                                                     <div className="flex items-center gap-4">
@@ -95,7 +105,6 @@ export function Students() {
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
                                                     {surname1}
                                                 </Typography>
-
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
@@ -118,7 +127,7 @@ export function Students() {
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {((currentDate.getFullYear() - new Date(birthDate).getFullYear()) >= 18 || leave == 'true' || leave == "1") ? (
+                                                    {((currentDate.getFullYear() - new Date(birthDate).getFullYear()) >= 18 || leave === 'true' || leave === 1) ? (
                                                         <span role="img" aria-label="Tick">✔️</span>
                                                     ) : (
                                                         <span role="img" aria-label="Cross">❌</span>
@@ -133,10 +142,9 @@ export function Students() {
                                                 >
                                                     Edit
                                                 </Typography>
-
                                             </td>
-                                            {role == 1 && (
-                                                < td className={className}>
+                                            {role === 1 && (
+                                                <td className={className}>
                                                     <Typography
                                                         as="a"
                                                         className="text-xs font-semibold text-blue-gray-600"
@@ -158,7 +166,7 @@ export function Students() {
                     </table>
                 </CardBody>
             </Card>
-        </div >
+        </div>
     );
 }
 
