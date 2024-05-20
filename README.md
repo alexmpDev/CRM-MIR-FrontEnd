@@ -1,8 +1,31 @@
-# React + Vite
+# CRM-MIR-FrontEnd
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es un CRM (Customer Relationship Management) frontend construido con React y Vite.
 
-Currently, two official plugins are available:
+## Dependencias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React
+- Vite
+- Tailwind CSS
+- ESLint
+- Prettier
+- Otras dependencias listadas en `package.json`
+
+## Instalación
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/alexmpDev/CRM-MIR-FrontEnd.git
+cd CRM-MIR-FrontEnd
+
+
+## Dependencias
+
+2. Instala las dependencias:
+
+npm install
+
+npm run build
+
+3. Configura el .env
