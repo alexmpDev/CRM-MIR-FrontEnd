@@ -79,7 +79,7 @@ export function Configurator({ brandImg, brandName, routes }) {
     localStorage.removeItem("user")
     localStorage.removeItem("menu")
     localStorage.removeItem("authToken")
-    location.href = "dashboard/home"
+    navigate("/dashboard/home")
   }
   return (
     <aside
