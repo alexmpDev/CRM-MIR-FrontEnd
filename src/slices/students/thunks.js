@@ -152,7 +152,7 @@ export const create = (payload) => {
                 formData.append("photo", payload.photo[0]); // Se adjunta el archivo solo si existe
             }
             console.log(formData)
-            await fetch(process.env.API_URL + "/api/students/" , {
+            await fetch(process.env.API_URL + "/api/students" , {
                 headers: {
                     Accept: "application/json",
                     "Authorization": "Bearer " + getState().auth.authToken

@@ -110,7 +110,7 @@ export const create = (payload) => {
     return async (dispatch, getState) => {
 
         try {
-            await fetch(process.env.API_URL + "/api/books/" , {
+            await fetch(process.env.API_URL + "/api/books" , {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
